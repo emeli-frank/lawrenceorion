@@ -1,0 +1,47 @@
+.center{
+	@include center();
+}
+.center-content > * {
+	@include center();
+}
+/* .inline-center
+{
+	display: inline-block;
+	@include center;
+} */
+.inline-center {
+	text-align: center;
+}
+.block-center
+{
+	display: block;
+	@include center;
+}
+.relative{
+	position: relative;
+}
+.absolute{
+	position: absolute;
+}
+.left{
+	float: left;
+}
+.float-left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.float-right{
+	float: right;
+}
+.center-text{
+	text-align: center;
+}
+.align-center{
+	text-align: center;
+}
+
+.overflow {
+	overflow: auto;
+}

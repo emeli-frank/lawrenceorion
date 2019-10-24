@@ -1,0 +1,41 @@
+/* DEFAULT NAVIGATION */
+
+#nav {
+    background-color: $primary-color;
+    color: #ffffff;
+}
+
+nav {
+    .navbar-brand, .nav-link, .nav-item.active, .navbar-toggler, .navbar-toggler-icon {
+        color: #ffffff !important;
+    }
+}
+
+/* nav .navbar-brand {
+    color: #ffffff !important;
+}
+
+nav .nav-link {
+    color: #ffffff !important;
+}
+
+nav .nav-item.active {
+    color: #ffffff !important;
+}
+
+nav .navbar-toggler {
+    color: #ffffff !important;
+}
+
+nav .navbar-toggler-icon {
+    color: #ffffff !important;
+} */
+
+.navbar-toggler {
+    border-color: #ffffff !important;
+    border: none !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url(/assets/images/icons/menu.svg) !important;
+}

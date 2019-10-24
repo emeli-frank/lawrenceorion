@@ -1,0 +1,106 @@
+/* SPONSOR INFORMATION */
+
+.sponsors-info {
+    display: inline-flex;
+}
+
+.sponsors-info > * {
+    margin-right: 20px;
+}
+
+.sponsor-logo {
+    margin-right: 20px;
+    width: 60px;
+}
+
+.sponsor-logo > img {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) /* and (min-relolution: 200dpi) */ {
+    .sponsors-info > * {
+        display: block;
+        margin-right: 0px;
+    }
+}
+
+
+/* HOME CAROUSEL */
+
+#jumbotron-wrapper {
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    color: #ffffff;
+
+    padding-top: 100px; /* to give space for transparent navigation bar*/
+    padding-bottom: 50px;
+    background-color: grey; // this creates contracts while image is being fetched from the server
+}
+
+.jumbotron-slide-1 {
+    background-image: url(/assets/images/jumbotron-image-bridge.jpg);
+}
+
+.jumbotron-slide-2 {
+    background-image: url(/assets/images/jumbotron-image-african-children.jpg);
+}
+
+.foo {
+    // height: 550px !important;
+}
+
+.jumbotron-button {
+    // float: left;
+    display: inline-block;
+}
+
+.jumbotron .sponsors-info {
+    // float: right;
+    // margin-left: auto;
+}
+
+@media screen and (max-width: 768px) /* and (min-relolution: 200dpi) */ {
+    .foo {
+        // height: 650px !important;
+    }
+
+    .jumbotron-button {
+        float: none;
+    }
+
+    .jumbotron .sponsors-info {
+        float: none;
+    }
+
+    .dynamic-jumbotron-button { // TODO: refactor
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .foo {
+        // height: 700px !important;
+    }
+}
+
+.main-title {
+    font-weight: 400;
+}
+
+.main-title__2 {
+    color: #1b9fb5;
+    font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+    .main-title__1 {
+        display: block;
+    }
+
+    .main-title__2 {
+        display: block;
+    }
+}

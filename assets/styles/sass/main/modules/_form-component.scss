@@ -1,0 +1,17 @@
+/* buttons */
+.button {
+    padding: 8px 10px 10px 10px;
+    text-decoration-style: none;
+    // background-color: $primary-color;
+    color: #ffffff;
+    border-radius: 3px;
+}
+
+.button:hover {
+    text-decoration-style: none;
+}
+
+.button.button-border {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}

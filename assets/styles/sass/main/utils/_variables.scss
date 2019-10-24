@@ -1,0 +1,20 @@
+$primary-color: #E86E2F;
+$secondary-color: #1b9fb5;
+$tertiary-color: grey; //TODO: change to something more definit
+$background-color: #eaeaea;
+
+//dimensions
+$adjusted-full-width: "calc(100% - 2*($container-side-padding))";
+$container-side-padding: 2.5%;
+$vertical-padding: 20px;
+$vertical-margin: 20px;
+$icon-width: 25px;
+
+//paths
+$image-base-path: '/assets/images/';
+
+//media query
+$screen-size-breaker: 1200px;
+
+// font color
+$default-font-color: 000000;

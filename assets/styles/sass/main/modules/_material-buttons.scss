@@ -1,0 +1,30 @@
+@mixin flat-button($bg-color: $primary-color, $color: #ffffff) {
+	padding: 5px 10px;
+	background-color: $bg-color;
+	color:  $color;
+	border-radius: 2px;
+	cursor: pointer;
+	/*:hover, :focus {
+		&:background-color: darken($bg-color, 20%);
+	}*/
+}
+.flat-button-primary {
+	@include flat-button();
+	&:hover, :focus {
+		background-color: #204173;
+	}
+}
+
+.flat-button-secondary {
+	@include flat-button($secondary-color, #ffffff);
+	/*&:hover, :focus {
+		background-color: #;
+	}*/
+}
+
+.flat-button-disabled {
+	@include flat-button(#dfdfdf, #a5a5a5);
+	&:hover, :focus {
+		background-color: #d5d5d5;
+	}
+}

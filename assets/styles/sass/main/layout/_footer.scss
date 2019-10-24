@@ -1,0 +1,41 @@
+footer {
+    margin-top: 56px;
+    font-size: 12px;
+    background-color: #191919;
+}
+
+footer, footer a{
+    color: #81807e;
+}
+
+.footer__body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.footer__foot {
+    background-color: #101011;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+
+.social-media-icons {
+    overflow: auto;
+}
+
+.social-media-icons > * {
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-right: 10px;
+}
+
+.footer__affiliate, .footer__connect {
+    margin-bottom: 15px;
+}
+
+footer a:hover {
+    color: $secondary-color !important;
+    opacity: 0.5;
+}

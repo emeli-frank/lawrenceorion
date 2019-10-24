@@ -1,0 +1,23 @@
+.inline > * {
+    float: left;
+}
+
+.overflow-auto { // TODO: check it this location is more appropraite for this rule
+    overflow: auto;
+}
+
+.page-container {
+    margin-top: 100px;
+}
+
+/* .home-container {
+    margin-top: 0px;
+} */
+
+.flex-container {
+    display: flex;
+}
+
+.flex-container.inline-flex {
+    display: inline-flex;
+}

@@ -1,0 +1,89 @@
+*{
+	box-sizing: border-box;
+}
+h1
+{
+	// text-align: center;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	letter-spacing: 0.05em;
+	@include center();
+	// margin-bottom: 30px;
+	}
+@media screen and (min-width: 768px) {
+	h1.content-header, #sidebar .card-head, #primary-navigation .card-head {
+		margin: 0;
+		padding: 0;
+		margin-bottom: 10px;
+		line-height: 25px;
+		max-height: 25px;
+		overflow: auto;
+	}
+}
+h2{
+	//text-align: center;
+	text-transform: uppercase;
+	font-size: 1.0em;
+	color: #646464;
+	//margin: auto auto;
+	letter-spacing: 0.1em;
+	@include center();
+	// margin-bottom: 30px;
+	}
+h3, h4, h5, h6{
+	font-size: 1.0em;
+	color: #646464;
+	letter-spacing: 0.1em;
+}
+h3, h4, h5, h6{
+	margin: 10px 0px;
+}
+body
+{
+	width: 100%;
+	background-color: $background-color;
+	margin: 0px;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section, {
+  display: block;
+}
+div, section
+{
+	margin: 0px;
+	padding: 0px;
+}
+p{
+	
+}
+a 
+{ 
+	text-decoration: none;
+	color: $primary-color;
+}
+// a:link 
+// {
+// 	color: maroon;
+// 	text-decoration: none;
+// 	color: $primary-color;
+// }
+/*a:visited 
+{
+	color: $gray; 
+}*/
+// a:hover, a:active 
+// {
+// 	color: #800000; 
+// }
+textarea {
+  overflow: auto;
+}
+
+b, strong {
+  font-weight: bold;
+}
+img {
+  border: 0;
+}
+pre {
+  overflow: auto;
+}

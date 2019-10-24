@@ -1,0 +1,34 @@
+.team-member {
+        padding-top: 20px;
+        padding-bottom: 50px;
+        overflow: auto;
+    }
+    
+    @media screen and (min-width: 768px) {    
+        .team-member__image {
+            float: left;
+            width: 160px;
+        }
+
+        .team-member__description {
+            float: left;
+            width: calc(100% - 160px);
+        }
+
+        .team-member__description > div {
+            padding-left: 50px;
+        }
+    }
+
+    .team-member__image__placeholder-image {
+        width: 160px;
+        height: 160px;
+        /* background-color: rgb(120, 120, 120); */
+        border-radius: 80px;
+        overflow: hidden;
+        border: 5px solid #1b9fb5
+    }
+
+    .team-member__description p {
+        text-align: justify;
+    }

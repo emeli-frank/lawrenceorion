@@ -1,0 +1,94 @@
+@mixin center()
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+@mixin button($type: 1, $color: $primary-color, $background-color: #ffffff, $line-height: 16px)
+{
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 10px 20px;
+	/*margin-top: 20px;
+	margin-bottom: 20px;*/ //parent wrapper should have the margins instead
+	line-height: $line-height;
+	color: $primary-color;
+	//background-color: $background-color;
+	background-color: inherit;
+	//width: 100px;
+	@include round-border();
+	@if ($type == 1)
+	{
+		border: 2px solid #{$primary-color} ! important;
+	}
+	:active
+	{
+		background-color: darken($background-color, 20%);
+	}
+}
+@mixin set-full-width()
+{
+	width: calc(100%-(2* #{$container-side-padding}));
+}
+@mixin text-input($type: 1, $display: block)
+{
+	$border-width: 1px;
+	display: $display;
+	@include set-full-width();
+	height: 40px;
+	@include center();
+	@if ($type==2)
+	{
+		border: #{$border-width} solid #{$primary-color};
+	}
+	@else if ($type==1)
+	{
+		border: none;
+		border-bottom: #{$border-width} solid #{$primary-color};
+	}
+}
+@mixin textarea($type: 1, $display: block, $height: 120px)
+{
+	$border-width: 1px;
+	display: $display;
+	@include set-full-width();
+	height: $height;
+	@include center();
+	@if ($type==2)
+	{
+		border: #{$border-width} solid #{$primary-color};
+	}
+	@else if ($type==1)
+	{
+		border: none;
+		border-bottom: #{$border-width} solid #{$primary-color};
+	}
+}
+@mixin pad-sides($horizontal: $container-side-padding, $vertical:null)
+{
+	padding-left: $horizontal;
+	padding-right: $horizontal;
+	padding-top: $vertical;
+	padding-bottom: $vertical;
+}
+@mixin round-border($all: 5px, $top-left: null, $top-right: null, $bottom-left: null, $bottom-right: null)
+{
+	@if ($top-left ==null AND $top-right == null AND $bottom-left == null AND $bottom-right == null)
+	{
+		$top-left: $all;
+		$top-right: $all;
+		$bottom-left: $all;
+		$bottom-right: $all;
+		border-radius: $all;
+	}
+	@else
+	{
+		border-top-left-radius:     $top-left;
+		border-top-right-radius:    $top-right;
+		border-bottom-left-radius:  $bottom-left;
+		border-bottom-right-radius: $bottom-right;
+	}
+}
+@mixin debug-border($color: #000000)
+{
+	border: 1px solid $color;
+}
