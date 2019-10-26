@@ -66,6 +66,10 @@ $route['admin/login'] = 'admin/login';
 $route['admin/register'] = 'admin/register';
 $route['admin/manage/categories'] = 'productmanager/categories';
 $route['admin/manage/categories/(:num)'] = 'productmanager/categories/$1';
+// $route['admin/manage/categories/(:num)/products/(:number)'] = 'productmanager/foo/$1$2';
+// $route['admin/manage/categories/(:num)/products'] = 'productmanager/foo/$1';
+$route['admin/manage/categories/(:num)/products/(:num)'] = 'productmanager/productDetail/$1/$2';
+$route['admin/manage/categories/(:num)/products/(:num)/edit'] = 'productmanager/productEdit/$1/$2';
+$route['admin/manage/categories/(:num)/products/add'] = 'productmanager/addProduct/$1/$2';
 
 $route['~manage/seed'] = 'manage/seed';
-

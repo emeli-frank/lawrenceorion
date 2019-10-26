@@ -11,11 +11,13 @@ class Manage extends CI_controller {
     	// creating categories and products
     	$this->clean('products');
     	$this->clean('categories');
-    	for ($i = 1; $i <= 10; $i++) {
+    	for ($i = 1; $i <= 5; $i++) {
     		$this->category_model->insert("Category $i");
-    		$category_id = $this->db->insert_id();
+			$category_id = $this->db->insert_id();
+			
+			$number_of_product = rand(40, 50);
 
-    		for ($product_index = 1; $product_index <= 10; $product_index++) {
+    		for ($product_index = 1; $product_index <= $number_of_product; $product_index++) {
     			$this->product_model->insert("Product $i" . "_" . "$product_index", $category_id);
     		}
 		}

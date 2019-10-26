@@ -14,6 +14,12 @@ class Category_model extends CI_Model {
     {
     	$this->name = $name;
         $this->db->insert('categories', $this);
-    }
-        
+	}
+	
+	public function getCategories() {
+		$query = $this->db
+			->select(['id', 'name'])
+			->from('categories')->get();
+		return $query->result();
+	}
 }
