@@ -16,10 +16,11 @@ class User_model extends CI_Model {
 
 		$array = array('email' => $email);
 		$query = $this->db
-			->select(['email', 'password'])
+			->select(['id', 'email', 'password'])
 			->from('users')
 			->where('email', $email)->get();
-        return $query->row_array();
+        return $query->result()[0];
+        // return $query->row_array();
 	}
 
 	public function insert($email, $password)

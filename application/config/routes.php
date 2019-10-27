@@ -57,9 +57,22 @@ $route['translate_uri_dashes'] = FALSE;
 $route['about-us'] = 'about';
 $route['contact-us'] = 'contact';
 
-$route['products'] = 'product';
+// $route['products'] = 'product';
 
 $route['~temp'] = 'publication/preview';
+
+
+
+$route['categories'] = 'product/showCategoriesAndProducts';
+$route['categories/all'] = 'product/showAllProducts';
+$route['categories/(:num)'] = 'product/showCategoriesAndProducts/$1';
+$route['categories/(:num)/products/(:num)'] = 'product/showProductDetail/$1/$2';
+$route['categories/(:num)/products/(:num)/edit'] = 'product/editProduct/$1/$2';
+$route['categories/(:num)/products/add'] = 'product/addProduct/$1/$2';
+
+
+
+
 
 $route['admin'] = 'admin';
 $route['admin/login'] = 'admin/login';

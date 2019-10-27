@@ -13,12 +13,14 @@
     #product {
         padding-left: 10px;
         padding-right: 10px;
+        width: 100%;
     }
 
     #category {
         padding-left: 10px;
         padding-right: 10px;
         width: 300px;
+        flex-shrink: 0;
         /* border: 1px solid black; */
     }
 </style>

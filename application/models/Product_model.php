@@ -51,12 +51,27 @@ class Product_model extends CI_Model {
         // return $query->row_array();
 	}
 
-	public function getProducts($id, $start_index, $number) {
-		$query = $this->db
-			->select(['id', 'name'])
-			->from('products')
-			->where('category_id', $id)
-			->limit($number, $start_index)->get();
+	public function getProducts($category_id = null, $start_index, $number) {
+		$query;
+
+
+		if ($category_id == null) {
+			$query = $this->db
+				->select(['id', 'name', 'category_id'])
+				->from('products')
+				->limit($number, $start_index)->get();
+			
+			// echo("null<br>");print_r(count($query->result()));die();
+		}
+		else {
+			$query = $this->db
+				->select(['id', 'name', 'category_id'])
+				->from('products')
+				->where('category_id', $category_id)
+				->limit($number, $start_index)->get();
+			// print_r($query->result());die();
+		}
+
 		return $query->result();
 	}
 
@@ -79,7 +94,12 @@ class Product_model extends CI_Model {
     }
 
 	public function getTotalNumberOfProduct($category_id = null) {
-		return $this->db->where(['category_id'=>$category_id])->from("products")->count_all_results();
+		if ($category_id == null) {
+			return $this->db->from("products")->count_all_results();
+		}
+		else {
+			return $this->db->where(['category_id'=>$category_id])->from("products")->count_all_results();
+		}
 	}
 
 	/* public function getCategory() {

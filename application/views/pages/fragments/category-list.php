@@ -25,8 +25,6 @@
   </div>
 </div>
 
-<div class="section-title space-vertical-small my-3">CATEGORIES</div>
-
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary d-flex justify-content-center align-content-between my-3" 
@@ -35,9 +33,15 @@
 </button>
 
 <ul class="list-group my-3">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/categories/all">
+            All
+        </a>
+        <!-- <span class="badge badge-primary badge-pill">*</span> -->
+    </li>
     <?php foreach ($categories as $category): ?>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a href="/admin/manage/categories/<?=$category->id?>" class="category-tile">
+            <a href="/categories/<?=$category->id?>" class="category-tile">
                 <?=$category->name?>
             </a>
             <span class="badge badge-primary badge-pill"><?=$category->product_count?></span>

@@ -73,6 +73,14 @@ class ProductManager extends CI_controller {
         $this->load->view('templates/footer');
     }
 
+    public function showProductDetail($category_id, $product_id) {
+        $data = ['data' => $this->product_model->getDetails($product_id)];
+
+        $this->load->view('templates/header');
+        $this->load->view('pages/fragments/product-detail', $data['data'][0]);
+        $this->load->view('templates/footer'); 
+    }
+
     public function productEdit($category_id, $product_id) {
         if ($this->input->post('product_id') && $this->input->post('name') && $this->input->post('category_id')) {
             $product_id = $this->input->post('product_id');
