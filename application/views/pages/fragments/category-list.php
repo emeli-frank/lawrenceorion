@@ -27,10 +27,12 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
-    data-toggle="modal" data-target="#categoryModel">
-    <i class="material-icons mr-1">add</i> <span>Add Category</span>
-</button>
+<?php if (isset($_SESSION['uid']) && $_SESSION['uid']) { ?>
+  <button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
+      data-toggle="modal" data-target="#categoryModel">
+      <i class="material-icons mr-1">add</i> <span>Add Category</span>
+  </button>
+<?php } ?>
 
 <ul class="list-group my-3">
     <a href="/categories/all" class="list-group-item d-flex justify-content-between align-items-center">

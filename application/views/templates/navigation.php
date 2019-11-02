@@ -10,10 +10,6 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
 
-<!--       <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li> -->
-
       <li class="nav-item">
         <a class="nav-link" href="/categories/all">Products</a>
       </li>
@@ -37,6 +33,12 @@
           <a class="nav-link" href="/logout">Logout</a>
         </li>
       <?php }?>
+
+    <?php if(!$this->session->userdata('uid')){ ?>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+    <?php }?>
     </ul>
   </div>
 </nav>

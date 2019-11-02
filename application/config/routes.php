@@ -63,27 +63,19 @@ $route['~temp'] = 'publication/preview';
 
 
 
-$route['categories'] = 'product/showCategoriesAndProducts';
-$route['categories/all'] = 'product/showAllProducts';
+// $route['categories'] = 'product/showCategoriesAndProducts';
+$route['categories/all'] = 'product/showCategoriesAndProducts';
 $route['categories/(:num)'] = 'product/showCategoriesAndProducts/$1';
 $route['categories/(:num)/products/(:num)'] = 'product/showProductDetail/$1/$2';
 $route['categories/(:num)/products/(:num)/edit'] = 'product/editProduct/$1/$2';
 $route['categories/(:num)/products/add'] = 'product/addProduct/$1/$2';
 
-
-
-
-
 $route['admin'] = 'admin';
+/* $route['admin/manage/categories'] = 'productmanager/categories';
+$route['admin/manage/categories/(:num)'] = 'productmanager/categories/$1'; */
+
 $route['login'] = 'account/login';
 $route['logout'] = 'account/logout';
 $route['register'] = 'account/register';
-$route['admin/manage/categories'] = 'productmanager/categories';
-$route['admin/manage/categories/(:num)'] = 'productmanager/categories/$1';
-// $route['admin/manage/categories/(:num)/products/(:number)'] = 'productmanager/foo/$1$2';
-// $route['admin/manage/categories/(:num)/products'] = 'productmanager/foo/$1';
-$route['admin/manage/categories/(:num)/products/(:num)'] = 'productmanager/productDetail/$1/$2';
-$route['admin/manage/categories/(:num)/products/(:num)/edit'] = 'productmanager/productEdit/$1/$2';
-$route['admin/manage/categories/(:num)/products/add'] = 'productmanager/addProduct/$1/$2';
 
 $route['~manage/seed'] = 'manage/seed';

@@ -5,13 +5,26 @@ class Product extends CI_controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->library('Authservice');
+        if ( ! $this->authservice->isLoggedIn()) {
+            // Allow some methods?
+            $allowed = [
+                // 'index',
+                'showProductDetail',
+                'showCategoriesAndProducts',
+                'foo',
+            ];
+            if ( ! in_array($this->router->fetch_method(), $allowed)) {
+                redirect('/login');
+            }
+        }
+
         $this->load->model('category_model');
         $this->load->model('product_model');
-        // $this->load->helper('form');
         $this->load->helper('url');
     }
 
-    public function index() {
+/*     public function index() {
         $start_index = $this->input->get('per_page', true);
         $data = [
             'products' => $this->product_model->getProducts(27, $start_index, Product::$no_of_products_to_load)
@@ -36,17 +49,9 @@ class Product extends CI_controller {
         $this->load->view('templates/header');
         $this->load->view('pages/fragments/product-list', $data);
         $this->load->view('templates/footer');
-    }
-
-    public function showAllProducts() {
-        $this->foo(null, true);
-    }
+    } */
 
     public function showCategoriesAndProducts($category_id = null) {
-        $this->foo($category_id);
-    }
-
-    private function foo($category_id = null, $all_products = false) {
         // $this->load->helper('url');
         // $current_url = urlencode(current_url() . '?' . $_SERVER['QUERY_STRING']);
         // print("encoded url: " . $current_url);die();
@@ -70,7 +75,6 @@ class Product extends CI_controller {
 
         $this->load->library('pagination');
 
-        $config['base_url'] = (!$all_products) ? '/categories/' . $category_id : '/categories/all' . $category_id; // todo:: fix, error prone and not scalable
         $config['total_rows'] = $this->product_model->getTotalNumberOfProduct($category_id);
         $config['per_page'] = Product::$no_of_products_to_load;
         $config['num_links'] = 3;
@@ -94,16 +98,13 @@ class Product extends CI_controller {
                         'category_id' => $category_id,
                     ], true);
         }
-        else if ($all_products) {
+        else {
             $data['product_view'] = $this->load->view('pages/fragments/product-list', 
                     [
                         'products' => $this->product_model->getProducts(null, $start_index, Product::$no_of_products_to_load),
                         'pagination_view' => $data['pagination_view'],
                         'category_id' => null // TODO:: fix, this might be bad
                     ], true);
-        }
-        else {
-            $data['product_view'] = null;
         }
 
         $this->load->view('templates/header');
