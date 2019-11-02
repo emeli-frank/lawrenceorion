@@ -9,27 +9,34 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/admin">Admin</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/login">Login</a>
-      </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/logout">Logout</a>
-      </li>
+<!--       <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li> -->
 
       <li class="nav-item">
         <a class="nav-link" href="/categories/all">Products</a>
       </li>
+
+      <?php if($this->session->userdata('uid')){ ?>
+        <li class="nav-item">
+        <a class="nav-link" href="/admin">Dashboard</a>
+        </li>
+      <?php }?>
+
       <li class="nav-item">
         <a class="nav-link" href="/about-us">About Us</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="/contact-us">Contact Us</a>
       </li>
+
+      <?php if($this->session->userdata('uid')){ ?>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      <?php }?>
     </ul>
   </div>
 </nav>

@@ -12,7 +12,7 @@ class Authservice {
 	}
 
 	public function isLoggedIn() {
-		return isset($this->CI->session->userdata['id']);
+		return isset($this->CI->session->userdata['uid']);
 	}
 
 	public function validateLoginCredentials($email, $password) {
@@ -20,25 +20,29 @@ class Authservice {
 
 		$this->CI->load->model('user_model');
 		$user_data = $this->CI->user_model->getAdminCredentials($email);
-			/* print_r($user_data);
-			die(); */
 		$stored_password = $user_data->password;
 
 		if (password_verify($received_password, $stored_password)) {
-			print('login successful');die();
 			$this->CI->session->set_userdata('uid', $user_data->id);
-			// print_r($this->CI->session->userdata['uid']);
-			redirect('/admin'); //todo:: redirect to previous url if any
 
-			return [
-				'id' => null,
-				'email' => $user_data['email'],
-				'password' => $user_data['password'],
-			];
+			// redirect('/admin'); //todo:: redirect to previous url if any
+
+			return true;
+
+			/* return [
+				'success' => true,
+				'data' => [
+					'id' => null,
+					'email' => $user_data['email'],
+					'password' => $user_data['password'],
+				],
+			]; */
 		}
 		else {
-			print('login was not successful');
-			redirect('/admin/login');
+			return false;
+			// return ['success' => false];
+			// print('login was not successful');
+			// redirect('/admin/login');
 		}
 		// $hashToStoreInDb = password_hash($password, PASSWORD_BCRYPT);
 	}

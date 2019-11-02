@@ -7,6 +7,8 @@ class Product extends CI_controller {
         parent::__construct();
         $this->load->model('category_model');
         $this->load->model('product_model');
+        // $this->load->helper('form');
+        $this->load->helper('url');
     }
 
     public function index() {
@@ -45,6 +47,9 @@ class Product extends CI_controller {
     }
 
     private function foo($category_id = null, $all_products = false) {
+        // $this->load->helper('url');
+        // $current_url = urlencode(current_url() . '?' . $_SERVER['QUERY_STRING']);
+        // print("encoded url: " . $current_url);die();
         $categories = $this->product_model->getCategories();
         if ($category_id) {
             $category_exist = false;
@@ -86,7 +91,7 @@ class Product extends CI_controller {
                     [
                         'products' => $this->product_model->getProducts($category_id, $start_index, Product::$no_of_products_to_load),
                         'pagination_view' => $data['pagination_view'],
-                        'category_id' => $category_id
+                        'category_id' => $category_id,
                     ], true);
         }
         else if ($all_products) {
@@ -130,18 +135,16 @@ class Product extends CI_controller {
     }
 
     public function addProduct($category_id = null) {
-        print_r($this->input->post('name'));
-        print_r($this->input->post('category_id'));
-        // die();
         if ($this->input->post('name') && $this->input->post('category_id')) {
             $name = $this->input->post('name');
             $result = $this->product_model->create($category_id, $name);
-            print('affected row: <h1>' . $result . '</h1>');
+            // print('affected row: <h1>' . $result . '</h1>');
+            redirect("categories/$category_id");
         }
         else {
             $data = [
                 'category_id' => $category_id,
-                'categories' => $this->category_model->getCategories()
+                'categories' => $this->category_model->getCategories(),
             ];
             $this->load->view('templates/header');
             $this->load->view('pages/fragments/product-add', $data);

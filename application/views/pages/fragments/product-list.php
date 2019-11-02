@@ -1,6 +1,12 @@
-<a href="/categories/<?=$category_id?>/products/add" class="btn btn-primary my-3">
+<!-- <a href="/categories/<?=$category_id?>/products/add?return_url<?= $return_url ?>" class="btn btn-primary my-3">
     Add Products
-</a>
+</a> -->
+
+<?php if ($category_id) { ?>
+    <a href="/categories/<?=$category_id?>/products/add" class="btn btn-outline-primary my-3">
+        Add Products
+    </a>
+<?php } ?>
 
 <div class=""><?=$pagination_view?></div>
 
@@ -12,7 +18,7 @@
         <a class="nav-link" id="manage-view-tab" data-toggle="tab" href="#manage-view" role="tab" aria-controls="manage-view" aria-selected="false">List View</a>
     </li>
 </ul>
-<div class="tab-content" id="myTabContent">
+<div class="tab-content my-3" id="myTabContent">
     <div class="tab-pane fade show active" id="customer-view" role="tabpanel" aria-labelledby="customer-view-tab">
         <div class="product-list-containter">
             <?php foreach ($products as $product): ?>
@@ -41,7 +47,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="manage-view" role="tabpanel" aria-labelledby="manage-view-tab">
-        <ul class="list-group">
+        <ul class="list-group manage-tile-tab">
             <?php foreach ($products as $product): ?>
                 <a href="/categories/<?=$product->category_id?>/products/<?=$product->id?>" class="product-tile list-group-item">
                     <li class="d-flex justify-content-between align-items-center">
@@ -100,5 +106,16 @@
     .price-old {
         text-decoration: line-through;
         font-size: 0.8em;
+    }
+
+    /* .manage-tile-tab {
+        margin-top: 20px;
+    } */
+
+    @media screen and (min-width: 768px) {
+        .manage-tile-tab {
+            max-width: 600px;
+            margin-left: 30px;
+        }
     }
 </style>

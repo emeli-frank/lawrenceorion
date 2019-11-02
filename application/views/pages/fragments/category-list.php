@@ -27,25 +27,21 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary d-flex justify-content-center align-content-between my-3" 
+<button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
     data-toggle="modal" data-target="#categoryModel">
     <i class="material-icons mr-1">add</i> <span>Add Category</span>
 </button>
 
 <ul class="list-group my-3">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/categories/all">
-            All
-        </a>
+    <a href="/categories/all" class="list-group-item d-flex justify-content-between align-items-center">
+        All
         <!-- <span class="badge badge-primary badge-pill">*</span> -->
-    </li>
+    </a>
     <?php foreach ($categories as $category): ?>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a href="/categories/<?=$category->id?>" class="category-tile">
-                <?=$category->name?>
-            </a>
+        <a href="/categories/<?=$category->id?>" class="category-tile list-group-item d-flex justify-content-between align-items-center">
+            <?=$category->name?>
             <span class="badge badge-primary badge-pill"><?=$category->product_count?></span>
-        </li>
+        </a>
     <?php endforeach; ?>
 </ul>
 

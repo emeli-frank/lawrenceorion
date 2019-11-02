@@ -75,8 +75,9 @@ $route['categories/(:num)/products/add'] = 'product/addProduct/$1/$2';
 
 
 $route['admin'] = 'admin';
-$route['admin/login'] = 'admin/login';
-$route['admin/register'] = 'admin/register';
+$route['login'] = 'account/login';
+$route['logout'] = 'account/logout';
+$route['register'] = 'account/register';
 $route['admin/manage/categories'] = 'productmanager/categories';
 $route['admin/manage/categories/(:num)'] = 'productmanager/categories/$1';
 // $route['admin/manage/categories/(:num)/products/(:number)'] = 'productmanager/foo/$1$2';
