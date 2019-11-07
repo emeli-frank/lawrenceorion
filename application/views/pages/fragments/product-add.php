@@ -26,7 +26,7 @@
         </div>
 
         <div class="custom-file">
-            <input type="file" class="custom-file-input" id="image-upload-input">
+            <input type="file" class="custom-file-input" id="image-upload-input" name="product-image">
             <label class="custom-file-label" for="image-upload-input">Choose image</label>
         </div>
 
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            <label for="jumia-product-url">Old price</label>
+            <label for="jumia-product-url">Jumia link</label>
             <input type="text" class="form-control" id="jumia-product-url" name="jumia-product-url" placeholder="Enter Jumia product url">
             <small class="form-text text-muted">Enter the url users are redirected to when the click your product</small>
         </div>

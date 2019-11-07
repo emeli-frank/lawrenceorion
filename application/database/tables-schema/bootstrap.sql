@@ -28,6 +28,12 @@ CREATE TABLE products (
 	id int NOT NULL AUTO_INCREMENT,
 	name varchar(128) NOT NULL,
 	category_Id smallint NOT NULL,
+	image_path varchar(256),
+	old_price int,
+	price int Not NULL,
+	jumia_product_url text,
+	short_description varchar(128),
+	custom_fields text,
 
 	PRIMARY KEY (id),
 	FOREIGN KEY (category_Id) REFERENCES categories(id)

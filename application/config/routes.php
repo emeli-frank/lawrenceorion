@@ -68,6 +68,7 @@ $route['categories/all'] = 'product/showCategoriesAndProducts';
 $route['categories/(:num)'] = 'product/showCategoriesAndProducts/$1';
 $route['categories/(:num)/products/(:num)'] = 'product/showProductDetail/$1/$2';
 $route['categories/(:num)/products/(:num)/edit'] = 'product/editProduct/$1/$2';
+$route['products/(:num)/delete'] = 'product/deleteProduct/$1';
 $route['categories/(:num)/products/add'] = 'product/addProduct/$1/$2';
 
 $route['admin'] = 'admin';

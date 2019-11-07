@@ -17,6 +17,12 @@ class Product_model extends CI_Model {
 	public $id;
 	public $category_id;
 	public $name;
+	public $image_path;
+	public $old_price;
+	public $price;
+	public $jumia_product_url;
+	public $short_description;
+	public $custom_fields;
 
 	public function __construct()
 	{
@@ -24,17 +30,25 @@ class Product_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function insert($name, $category_id)
-    {
-    	$this->name = $name;
-    	$this->category_id = $category_id;
-        $this->db->insert('products', $this);
-	}
+	public function create(
+		$name, 
+		$category_id,
+		$image_path,
+		$price,
+		$old_price,
+		$jumia_product_url,
+		$short_description,
+		$custom_fields = null
+		){
 
-	public function create($category_id, $name)
-    {
     	$this->name = $name;
-    	$this->category_id = $category_id;
+		$this->category_id = $category_id;
+		$this->image_path = $image_path;
+		$this->old_price = $old_price;
+		$this->price = $price;
+		$this->jumia_product_url = $jumia_product_url;
+		$this->short_description = $short_description;
+		$this->custom_fields = $custom_fields;
         $this->db->insert('products', $this);
 	}
 	
@@ -77,7 +91,7 @@ class Product_model extends CI_Model {
 
 	public function getDetails($id) {
 		$query = $this->db
-			->select(['id', 'name', 'category_id'])
+			->select(['id', 'name', 'category_id', 'price', 'old_price', 'image_path', 'jumia_product_url', 'custom_fields', 'short_description'])
 			->from('products')
 			->where('id', $id)->get();
 
@@ -102,6 +116,34 @@ class Product_model extends CI_Model {
 		}
 	}
 
+	public function delete($product_id) {
+		$category_id = $this->productCategoryId($product_id);
+		// $this->db->delete('products', ['id', $product_id]);
+
+		$sql = "DELETE FROM products WHERE id=$product_id"; //TODO:: change, sql injection is possible
+		$query = $this->db->query($sql);
+		// print_r($query->result());
+		// die();
+		// return $query->result_array();
+		redirect("/categories/$category_id");
+	}
+
+	public function categoryExist($category_id) {
+		$query = $this->db->from('categories')->select(['id'])->where(['id' => $category_id])->get();
+		return ($query->row()) ? true : false;
+	}
+
+	public function productExist($product_id) {
+		$query = $this->db->from('products')->select(['id'])->where(['id' => $product_id])->get();
+		return ($query->row()) ? true : false;
+	}
+
+	public function productCategoryId($product_id) {
+		$query = $this->db->from('products')->select(['category_id'])->where(['id' => $product_id])->get();
+		$result = $query->row();
+		return $result->category_id;
+	}
+
 	/* public function getCategory() {
 		$array = array('email' => $email);
 		$query = $this->db
@@ -110,5 +152,4 @@ class Product_model extends CI_Model {
 			->where('email', $email)->get();
         return $query->row_array()
 	} */
-        
 }

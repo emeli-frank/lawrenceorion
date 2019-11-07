@@ -15,10 +15,19 @@ class Manage extends CI_controller {
     		$this->category_model->insert("Category $i");
 			$category_id = $this->db->insert_id();
 			
-			$number_of_product = rand(40, 50);
+			$number_of_product = rand(0, 10);
 
     		for ($product_index = 1; $product_index <= $number_of_product; $product_index++) {
-    			$this->product_model->insert("Product $i" . "_" . "$product_index", $category_id);
+    			$this->product_model->create(
+					"Product $i" . "_" . "$product_index", 
+					$category_id,
+					"product-placeholder-image.jpg",
+					8000,
+					4500,
+					"jumia.com",
+					"some short description for the product",
+					""
+				);
     		}
 		}
 
