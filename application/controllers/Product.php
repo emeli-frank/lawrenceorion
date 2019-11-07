@@ -40,7 +40,11 @@ class Product extends CI_controller {
             }
         }
         
-        $data['category_view'] = $this->load->view('pages/fragments/category-list', ['categories' => $categories], true);
+        $data['category_view'] = $this->load->view(
+            'pages/fragments/category-list', 
+            ['categories' => $categories, 'current_category_id' => $category_id, 'all_category_class' => (!$category_id) ? 'active' : ''], 
+            true
+        );
 
 
         $this->load->library('pagination');

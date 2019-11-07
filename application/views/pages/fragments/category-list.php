@@ -35,14 +35,17 @@
 <?php } ?>
 
 <ul class="list-group my-3">
-    <a href="/categories/all" class="list-group-item d-flex justify-content-between align-items-center">
+    <a href="/categories/all" class="list-group-item d-flex justify-content-between align-items-center <?= $all_category_class ?>">
         All
         <!-- <span class="badge badge-primary badge-pill">*</span> -->
     </a>
     <?php foreach ($categories as $category): ?>
-        <a href="/categories/<?=$category->id?>" class="category-tile list-group-item d-flex justify-content-between align-items-center">
+        <?php $is_active_class = ($category->id == $current_category_id) ? "active" : "" ?>
+        <a href="/categories/<?=$category->id?>" class="category-tile list-group-item d-flex justify-content-between align-items-center <?= $is_active_class ?>">
             <?=$category->name?>
+            <?php if ($this->authservice->isLoggedIn()): ?>
             <span class="badge badge-primary badge-pill"><?=$category->product_count?></span>
+            <?php endif ?>
         </a>
     <?php endforeach; ?>
 </ul>
