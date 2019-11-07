@@ -58,14 +58,16 @@
 
 
 
-
-
-            <div>
-                <a href="/categories/<?=$category_id?>/products/<?=$id?>/edit">Edit</a>
-            </div>
-            <div>
-                <a href="/products/<?=$id?>/delete">Delete</a>
-            </div>
+            <?php if ($this->authservice->isLoggedIn()):?>
+                <div>
+                    <div>
+                        <a href="/categories/<?=$category_id?>/products/<?=$id?>/edit">Edit</a>
+                    </div>
+                    <div>
+                        <a href="/products/<?=$id?>/delete">Delete</a>
+                    </div>
+                </div>
+            <?php endif ?>
         </div>
     </div>
 </div>

@@ -27,7 +27,7 @@
 
 
 <!-- Button trigger modal -->
-<?php if (isset($_SESSION['uid']) && $_SESSION['uid']) { ?>
+<?php if ($this->authservice->isLoggedIn()) { ?>
   <button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
       data-toggle="modal" data-target="#categoryModel">
       <i class="material-icons mr-1">add</i> <span>Add Category</span>

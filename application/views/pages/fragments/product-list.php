@@ -2,7 +2,7 @@
     Add Products
 </a> -->
 
-<?php if (isset($_SESSION['uid']) && $_SESSION['uid'] && $category_id) { ?>
+<?php if ($this->authservice->isLoggedIn() && $category_id) { ?>
     <a href="/categories/<?=$category_id?>/products/add" class="btn btn-outline-primary my-3">
         Add Products
     </a>
