@@ -159,7 +159,12 @@ class Product extends CI_controller {
     }
 
     public function deleteProduct($product_id) {
+        $category_id = $this->product_model->productCategoryId($product_id);
         $this->product_model->delete($product_id);
+        $this->session->set_flashdata('success', 'The item was successfully deleted');
+        print( $this->session->flashdata('success') );
+        // die();
+		redirect("/categories/$category_id");
     }
 
 }
