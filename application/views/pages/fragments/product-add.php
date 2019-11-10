@@ -13,7 +13,8 @@
             <select id="category-input" required class="form-control" required name="category_id">
                 <option selected>Choose...</option>
                 <?php foreach ($categories as $category): ?>
-                    <option value="<?=$category->id?>"><?=$category->name?></option>
+                    <?php $selected = ($category->id == $category_id) ? "selected" : ""; ?>
+                    <option value="<?=$category->id?>" <?= $selected ?>><?=$category->name?></option>
                 <?php endforeach; ?>
             </select>
         </div>
