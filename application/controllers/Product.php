@@ -121,7 +121,10 @@ class Product extends CI_controller {
             && $this->input->post('price')
             && $this->input->post('old-price')
             && $this->input->post('jumia-product-url')
+            && $this->input->post('custom-field-data')
             ) {
+
+            // die("Adding product");
 
             $name = $this->input->post('name');
             $product_description = $this->input->post('product-description');
@@ -130,6 +133,7 @@ class Product extends CI_controller {
             $jumia_product_url = $this->input->post('jumia-product-url');
             $image_path = "product-placeholder-image.jpg";
             $short_description = null;
+            $custom_fields = $this->input->post('custom-field-data');
 
             $result = $this->product_model->create(
                 $name,
@@ -139,8 +143,9 @@ class Product extends CI_controller {
                 $old_price,
                 $jumia_product_url,
                 $short_description,
-                $custom_fields = null
+                $custom_fields
             );
+            $this->session->set_flashdata('success', 'Product was successfully created');  
             // print('affected row: <h1>' . $result . '</h1>');
             redirect("categories/$category_id");
         }
@@ -162,7 +167,7 @@ class Product extends CI_controller {
         $category_id = $this->product_model->productCategoryId($product_id);
         $this->product_model->delete($product_id);
         $this->session->set_flashdata('success', 'The item was successfully deleted');
-        print( $this->session->flashdata('success') );
+        // print( $this->session->flashdata('success') );
         // die();
 		redirect("/categories/$category_id");
     }

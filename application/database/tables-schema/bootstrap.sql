@@ -6,7 +6,7 @@ GRANT ALL ON website.* TO 'user'@'localhost';
 
 USE website;
 
-DROP TABLE IF EXISTS admin
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	id tinyint NOT NULL AUTO_INCREMENT,
 	email varchar(128) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE users (
 	PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS categories
+DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
 	id smallint NOT NULL AUTO_INCREMENT,
 	name varchar(128) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE categories (
 	PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS products
+DROP TABLE IF EXISTS products;
 CREATE TABLE products (
 	id int NOT NULL AUTO_INCREMENT,
 	name varchar(128) NOT NULL,

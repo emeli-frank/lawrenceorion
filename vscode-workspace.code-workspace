@@ -7,5 +7,7 @@
 			"path": "assets\\styles\\sass\\main"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.autoSave": "onFocusChange"
+	}
 }

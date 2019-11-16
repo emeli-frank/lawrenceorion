@@ -38,7 +38,7 @@ class Product_model extends CI_Model {
 		$old_price,
 		$jumia_product_url,
 		$short_description,
-		$custom_fields = null
+		$custom_fields
 		){
 
     	$this->name = $name;
