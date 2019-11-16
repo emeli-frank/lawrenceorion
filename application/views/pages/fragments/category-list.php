@@ -1,37 +1,7 @@
-<!-- Modal -->
-<div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" aria-labelledby="categoryModel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add New Category</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
-        
-      <form>
-        <div class="form-group">
-            <label for="categoryNameInput">Category Name</label>
-            <input type="email" class="form-control" id="categoryNameInput" placeholder="Category name">
-            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-        </div>
-        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Button trigger modal -->
 <?php if ($this->authservice->isLoggedIn()) { ?>
-  <button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
-      data-toggle="modal" data-target="#categoryModel">
-      <i class="material-icons mr-1">add</i> <span>Add Category</span>
-  </button>
+  <a href="/categories" class="btn btn-outline-primary my-3">
+      Manage Categories
+  </a>
 <?php } ?>
 
 <ul class="list-group my-3">

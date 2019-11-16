@@ -15,7 +15,7 @@ class Product extends CI_controller {
                 'foo',
             ];
             if ( ! in_array($this->router->fetch_method(), $allowed)) {
-                redirect('/login');
+                redirect('/');
             }
         }
 

@@ -1,5 +1,5 @@
 <div id ="product-list-container" class="page-container">
-    <?php if ($this->session->flashdata('success')): ?>
+    <?php if ($this->session->flashdata('success')): ?><!-- Put in a template fragment -->
     <div class="alert alert-success" role="alert">
         <?= $this->session->flashdata('success'); ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

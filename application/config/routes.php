@@ -62,6 +62,12 @@ $route['contact-us'] = 'contact';
 $route['~temp'] = 'publication/preview';
 
 
+$route['categories'] = 'category/showCategories';
+$route['categories/add'] = 'category/addCategory';
+$route['categories/(:num)/edit'] = 'category/editCategory/$1';
+$route['categories/(:num)/delete'] = 'category/deleteCategory/$1';
+
+
 
 // $route['categories'] = 'product/showCategoriesAndProducts';
 $route['categories/all'] = 'product/showCategoriesAndProducts';
