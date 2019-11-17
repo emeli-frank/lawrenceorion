@@ -31,11 +31,11 @@
                             <div class="price">
                                 <span class="price-current">
                                     <span data-currency-iso="NGN">₦</span>
-                                    <span>4,500</span>
+                                    <span><?=$product->price?></span>
                                 </span>
                                 <span class="price-old ">
                                     <span data-currency-iso="NGN">₦</span>
-                                    <span>10,000</span>
+                                    <span><?=$product->old_price?></span>
                                 </span>
                             </div>
                             <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->

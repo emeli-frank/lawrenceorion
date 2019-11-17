@@ -33,7 +33,9 @@ class Category extends CI_controller {
 
     public function bar($category_id) {
         $data  = [
-            'action' => ($category_id) ? 'edit' : 'add',
+            // 'action' => ($category_id) ? 'edit' : 'add',
+            'category_id' => $category_id,
+            'category_name' => 'category_name',
         ];
 
         if (

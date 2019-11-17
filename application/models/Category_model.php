@@ -27,6 +27,7 @@ class Category_model extends CI_Model {
 		// $this->db->from('categoreis')->where(['id' => $category_id])->set(['name' => $category_name]);
 		
 		$this->name = $category_name;
+		$this->id = $category_id;
         $this->db->update('categories', $this, ['id' => $category_id]);
 
 		/* $sql = "UPDATE categories SET name='$category_name' WHERE id=$category_id"; //TODO:: change, sql injection is possible

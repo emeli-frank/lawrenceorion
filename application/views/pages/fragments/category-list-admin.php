@@ -9,22 +9,26 @@
     <?php endif ?>
 
 
-    <a href="/categories/add" class="btn btn-outline-primary my-3">
-        Add new category
-    </a>
 
-    <ul class="list-group my-3">
+
+    <ul class="list-group my-3 category-list">
+        <a href="/categories/add" class="btn btn-outline-primary my-3" style="width: min-content">
+            Add new category
+        </a>
+
         <?php foreach ($categories as $category): ?>
+        <div class="abc">
             <a href="/categories/<?=$category->id?>/edit" 
-            class="category-tile list-group-item d-flex justify-content-between align-items-center">
+            class="category-tile list-group-item d-flex justify-content-between align-items-center tile">
                 <?=$category->name?>
                 <span class="badge badge-primary badge-pill"><?=$category->product_count?></span>
-                <span class="badge badge-primary badge-pill"><a href="/categories/<?= $category->id ?>/delete">Delete</a></span>
-                <span data-toggle="modal" data-target="#categoryModel"
-                    data-id="<?=$category->id ?>">
-                    Delete
-                </span>
+                <!-- <span class="badge badge-primary badge-pill"><a href="/categories/<?= $category->id ?>/delete">Delete</a></span> -->
             </a>
+            <span class="delete-button" data-toggle="modal" data-target="#categoryModel"
+                data-id="<?=$category->id ?>">
+                <i class="material-icons">delete</i>
+            </span>
+        </div>
         <?php endforeach; ?>
     </ul>
 </div>
@@ -111,5 +115,25 @@
         height: 100%;
         position: absolute;
         z-index: -1;   
+    }
+
+    .abc {
+        display: flex;
+    }
+
+    .abc > .delete-button {
+        color: #E86E2F;
+        cursor: pointer;
+        align-self: center;
+        padding-left: 15px;
+    }
+
+    .abc > .tile {
+        flex-grow: 1;
+    }
+
+    .category-list {
+        max-width: 800px;
+        margin: auto;
     }
 </style>

@@ -49,6 +49,7 @@ class Product_model extends CI_Model {
 		$this->jumia_product_url = $jumia_product_url;
 		$this->short_description = $short_description;
 		$this->custom_fields = $custom_fields;
+		// print_r($this); die();
         $this->db->insert('products', $this);
 	}
 	
@@ -67,11 +68,12 @@ class Product_model extends CI_Model {
 
 	public function getProducts($category_id = null, $start_index, $number) {
 		$query;
+		$select = ['id', 'name', 'category_id', 'image_path', 'price', 'old_price', 'jumia_product_url', 'short_description', 'custom_fields'];
 
 
 		if ($category_id == null) {
 			$query = $this->db
-				->select(['id', 'name', 'category_id'])
+				->select($select)
 				->from('products')
 				->limit($number, $start_index)->get();
 			
@@ -79,12 +81,15 @@ class Product_model extends CI_Model {
 		}
 		else {
 			$query = $this->db
-				->select(['id', 'name', 'category_id'])
+				->select($select)
 				->from('products')
 				->where('category_id', $category_id)
 				->limit($number, $start_index)->get();
 			// print_r($query->result());die();
 		}
+
+		/* print_r($query->result());
+		die(); */
 
 		return $query->result();
 	}

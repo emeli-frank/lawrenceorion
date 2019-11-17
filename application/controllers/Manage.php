@@ -12,7 +12,7 @@ class Manage extends CI_controller {
     	$this->clean('products');
     	$this->clean('categories');
     	for ($i = 1; $i <= 5; $i++) {
-    		$this->category_model->insert("Category $i");
+    		$this->category_model->create("Category $i");
 			$category_id = $this->db->insert_id();
 			
 			$number_of_product = rand(0, 10);
