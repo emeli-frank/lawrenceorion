@@ -22,6 +22,7 @@ class Product extends CI_controller {
         $this->load->model('category_model');
         $this->load->model('product_model');
         $this->load->helper('url');
+        $this->load->helper(['form', 'url']);
     }
 
     public function showCategoriesAndProducts($category_id = null) {
@@ -124,8 +125,6 @@ class Product extends CI_controller {
             && $this->input->post('custom-field-data')
             ) {
 
-            // die("Adding product");
-
             $name = $this->input->post('name');
             $product_description = $this->input->post('product-description');
             $price = $this->input->post('price');
@@ -144,9 +143,31 @@ class Product extends CI_controller {
                 $jumia_product_url,
                 $short_description,
                 $custom_fields
-            );
-            $this->session->set_flashdata('success', 'Product was successfully created');  
-            // print('affected row: <h1>' . $result . '</h1>');
+                );
+
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 500;
+            $config['file_name']             = time();
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('product-image')) {
+                $error = ['error' => $this->upload->display_errors()];
+
+                // $this->load->view('upload_form', $error);
+
+                /* print_r($error);
+                $err_str = json_encode($error); */  
+
+            }
+            else {
+                $data = array('upload_data' => $this->upload->data());
+                
+
+                // $this->load->view('upload_success', $data);
+            }
+            $this->session->set_flashdata('success', 'Product was successfully created');
             redirect("categories/$category_id");
         }
         else {
@@ -160,8 +181,30 @@ class Product extends CI_controller {
         }
         
 		/* print_r($this->category_model->getCategories()[0]);
-		die(); */
+        die(); */
+        
     }
+
+    /* public function doUpload() {
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 500;
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('product-image')) {
+                // die("no file");
+                $error = ['error' => $this->upload->display_errors()];
+
+                // $this->load->view('upload_form', $error);
+            }
+           else {
+               die("found file");
+                $data = array('upload_data' => $this->upload->data());
+
+                // $this->load->view('upload_success', $data);
+            }
+    } */
 
     public function deleteProduct($product_id) {
         $category_id = $this->product_model->productCategoryId($product_id);

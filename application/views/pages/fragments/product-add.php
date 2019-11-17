@@ -1,7 +1,8 @@
 <div class="container page-container">
     <h2>Add product</h2>
 
-    <form method="POST" action="/categories/<?=$category_id?>/products/add">
+    <!-- <form method="POST" action="/categories/<?=$category_id?>/products/add"> -->
+    <?php echo form_open_multipart('/categories/' . $category_id . '/products/add');?>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" maxlength="64">
@@ -30,6 +31,8 @@
             <input type="file" class="custom-file-input" id="image-upload-input" name="product-image">
             <label class="custom-file-label" for="image-upload-input">Choose image</label>
         </div>
+
+        <input type="file" name="product-image" size="20" />
 
         <div class="form-group">
             <label for="price">Price</label>

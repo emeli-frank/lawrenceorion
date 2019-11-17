@@ -43,7 +43,7 @@ class Category extends CI_controller {
             $category_name = $this->input->post('category-name');
             $category_id = $this->input->post('category-id');
             
-            $this->category_model->edit($id, $category_name);
+            $this->category_model->update($category_id, $category_name);
             $this->session->set_flashdata('success', 'Changes have been saved'); 
             redirect("/categories"); //TODO:: se if you can call back refere url 
         }

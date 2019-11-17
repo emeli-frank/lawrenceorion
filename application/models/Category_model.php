@@ -23,6 +23,16 @@ class Category_model extends CI_Model {
 		return $query->result();
 	}
 
+	public function update($category_id, $category_name) {
+		// $this->db->from('categoreis')->where(['id' => $category_id])->set(['name' => $category_name]);
+		
+		$this->name = $category_name;
+        $this->db->update('categories', $this, ['id' => $category_id]);
+
+		/* $sql = "UPDATE categories SET name='$category_name' WHERE id=$category_id"; //TODO:: change, sql injection is possible
+		$query = $this->db->query($sql); */
+	}
+
 	public function delete($category_id) {
 		$sql = "DELETE FROM products WHERE category_id=$category_id"; //TODO:: change, sql injection is possible
 		$query = $this->db->query($sql);
