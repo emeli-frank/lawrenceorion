@@ -32,7 +32,7 @@
             <label class="custom-file-label" for="image-upload-input">Choose image</label>
         </div>
 
-        <input type="file" name="product-image" size="20" />
+        <!-- <input type="file" name="product-image" size="20" /> -->
 
         <div class="form-group">
             <label for="price">Price</label>
@@ -56,7 +56,7 @@
         <h3>Custom field</h3>
             <!-- Button trigger modal -->
             <div id="custom-fields">
-                <div class="custom-field">
+<!--                 <div class="custom-field">
                     <div class="label">Test label</div>
                     <div class="body">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
@@ -74,7 +74,7 @@
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
+                </div> -->
 
 
 
@@ -118,7 +118,7 @@
             <textarea class="form-control" id="customFieldDescription" placeholder="Field description"></textarea>
         </div>
         <button type="button" class="btn" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" onClick="appendCustomField()">Save</button>
+        <button type="button" class="btn btn-primary" onClick="addCustomField()">Save</button>
         </form>
 
       </div>
@@ -132,18 +132,41 @@
 
 <script>
     class CustomField {
+        id;
         label;
         body;
 
-        constructor(label, body) {
+        constructor(id, label, body) {
+            this.id = id;
             this.label = label;
             this.body = body;
         }
     }
 
     fields = [];
+    nextId = 1;
 
-    function appendCustomField() {
+    /* function generateNext() {
+        next = 1;
+        
+        return function() {
+            return next++;
+        }
+    }
+
+    let next = generateNext(); */
+
+    function deleteCustomField(id) {
+        for (var i = 0; i < fields.length; i++) {
+                console.warn('fields[i] = ' + fields[i].id);
+                console.warn('id = ' + id);
+            if (fields[i].id == id) {
+                fields.splice(i, 1);
+            }
+        }
+    }
+
+    function addCustomField() {
         let labelElem = document.querySelector('#customFieldLabel');
         let bodyElem = document.querySelector('#customFieldDescription');
 
@@ -152,6 +175,8 @@
             bodyElem.value
         );
 
+        // console.log(fields);
+
         labelElem.value = "";
         bodyElem.value = "";
 
@@ -159,8 +184,8 @@
     }
 
     function makeCustomField(label, body) {
-        fields.push(new CustomField(label, body))
-        document.querySelector('#custom-field-data').setAttribute('value', JSON.stringify(fields))
+        id = nextId++;
+        fields.push(new CustomField(id, label, body))
 
         build();
     }
@@ -173,9 +198,25 @@
 
 
         for (let i = 0; i < fields.length; i++) {
+            id = fields[i].id;
+
             var labelElem = document.createElement('div');
-            labelElem.classList.add('card-header')
-            labelElem.textContent = fields[i].label;
+            labelElem.classList.add('card-header');
+            labelElem.classList.add('custom-field-header');
+            labelElem.setAttribute('data-id', id)
+            // labelElem.textContent = fields[i].label;
+            foo = document.createElement('span');
+            foo.classList.add('header-label');
+            foo.textContent = fields[i].label;
+            bar = document.createElement('span');
+            bar.classList.add('header-icon');
+            deleteIcon = document.createElement('i');
+            deleteIcon.classList.add('material-icons');
+            deleteIcon.setAttribute('data-id', id)
+            deleteIcon.textContent = "delete";
+            bar.appendChild(deleteIcon);
+            labelElem.appendChild(foo);
+            labelElem.appendChild(bar);
 
             var bodyElem = document.createElement('div');
             bodyElem.classList.add('card-body');
@@ -194,7 +235,16 @@
             // customFieldContainer.classList.add('custom-field');
 
             parent.appendChild(customFieldContainer);
+
+            deleteIcon.addEventListener('click', function(event){ 
+                console.log(fields);
+                deleteCustomField(event.target.getAttribute('data-id'));
+                console.log(fields);
+                build();
+            });
         }
+
+        document.querySelector('#custom-field-data').setAttribute('value', JSON.stringify(fields))
     }
 </script>
 
@@ -203,5 +253,10 @@
         border: 1px solid grey;
         padding: 15px;
         margin: 15px 0;
+    }
+
+    .custom-field-header {
+        display: flex;
+        justify-content: space-between;
     }
 </style>

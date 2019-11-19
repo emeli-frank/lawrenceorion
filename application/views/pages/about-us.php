@@ -1,46 +1,9 @@
 <div class="container page-container">
-    <h2>Our History</h2>
+    <h2>Lorem ipsum dolor sit amet</h2>
 
-    <p>Evidence Based Health Care Research Group (EBHC) was informed and supported by Alexander von Humboldt 
-        Foundation return fellowship awarded to the group coordinator. Staff and post graduate students of 
-        Nnamdi Azikiwe University interested in the group's research themes were invited to join the group. 
-        The first inaugural meeting held in the Faculty of Pharmacy, Nnamdi Azikiwe University on the 16th of 
-        January, 2017.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit euismod in pellentesque massa placerat duis. Quis eleifend quam adipiscing vitae. Sit amet cursus sit amet dictum. Sollicitudin aliquam ultrices sagittis orci a. Quis hendrerit dolor magna eget. Vitae sapien pellentesque habitant morbi tristique. Purus non enim praesent elementum facilisis leo vel fringilla est. Turpis in eu mi bibendum. Adipiscing vitae proin sagittis nisl. Nunc pulvinar sapien et ligula ullamcorper malesuada proin libero. Ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant. Pretium quam vulputate dignissim suspendisse in est ante in nibh. Metus vulputate eu scelerisque felis. Egestas tellus rutrum tellus pellentesque eu. Interdum posuere lorem ipsum dolor. Cras semper auctor neque vitae. Aliquet porttitor lacus luctus accumsan tortor posuere. Diam vulputate ut pharetra sit. Est velit egestas dui id ornare arcu odio ut sem.</p>
 
-    <p>EBHC conducts research principally in the following three major areas: Systematic Reviews; 
-        Clinical Research; and Pharmacoeconomics.</p>
+   <p> Odio facilisis mauris sit amet massa vitae tortor condimentum. Nibh sed pulvinar proin gravida hendrerit. Lorem mollis aliquam ut porttitor. Sed enim ut sem viverra aliquet eget. Arcu felis bibendum ut tristique et egestas quis ipsum suspendisse. Commodo ullamcorper a lacus vestibulum sed arcu non odio euismod. Dui sapien eget mi proin sed libero. Imperdiet proin fermentum leo vel orci. Adipiscing vitae proin sagittis nisl. Consectetur adipiscing elit duis tristique sollicitudin nibh sit amet. Amet facilisis magna etiam tempor. Metus vulputate eu scelerisque felis imperdiet. Ultricies lacus sed turpis tincidunt id.</p>
 
-    <h2>Systematic Reviews</h2>
-
-    <p>A systematic review attempts to collate all empirical evidence that fits pre-specified eligibility 
-    criteria in order to answer a specific research question.  It  uses explicit, systematic methods that 
-    are selected with a view to minimizing bias, thus providing more reliable findings from which conclusions 
-    can be drawn and decisions made.</p>
-
-    <p>The key characteristics of a systematic review are:</p>
-
-    <ol>
-        <li>A clearly stated set of objectives with pre-defined eligibility criteria for studies</li>
-        <li>An explicit, reproducible methodology</li>
-        <li>A systematic search that attempts to identify all studies that would meet the eligibility criteria</li>
-        <li>An assessment of the validity of the findings of the included studies</li>
-        <li>A systematic presentation, and synthesis, of the characteristics and findings of the included studies</li>
-    </ol>
-
-    <p>Meta-analysis is the use of statistical methods to summarize the results of independent studies. 
-    Many systematic reviews contain meta-analyses. By combining information from all relevant studies, 
-    meta-analyses can provide more precise estimates of the effects of health care than those derived 
-    from the individual studies included within a review. They also facilitate investigations of the 
-    consistency of evidence across studies, and the exploration of differences across studies.</p>
-
-    <h2>Clinical Research</h2>
-
-    <ol>
-        <li>Mechanisms of human disease</li>
-        <li>Therapeutic interventions</li>
-        <li>Clinical trials</li>
-        <li>Development of new technologies</li>
-        <li>Epidemiologic and behavioral studies</li>
-        <li>Outcomes research and health services research</li>
-    </ol>
+    <p>Consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Auctor elit sed vulputate mi sit amet mauris. Bibendum neque egestas congue quisque egestas diam. Aliquet bibendum enim facilisis gravida neque convallis a. Vitae congue eu consequat ac felis donec et. Vel elit scelerisque mauris pellentesque. Ullamcorper eget nulla facilisi etiam dignissim. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Faucibus vitae aliquet nec ullamcorper. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Faucibus interdum posuere lorem ipsum. Suscipit adipiscing bibendum est ultricies. Lorem donec massa sapien faucibus et molestie. Condimentum lacinia quis vel eros donec. Augue mauris augue neque gravida in fermentum et sollicitudin. Proin sed libero enim sed faucibus turpis in. Tristique risus nec feugiat in. Id diam vel quam elementum pulvinar etiam.</p>
 </div>
