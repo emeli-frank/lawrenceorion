@@ -1,94 +1,99 @@
 <div class="container page-container">
-    <h2>Add product</h2>
+    <div class="product-add-container">
+        <h2 style="margin-bottom: 50px">Add product</h2>
 
-    <!-- <form method="POST" action="/categories/<?=$category_id?>/products/add"> -->
-    <?php echo form_open_multipart('/categories/' . $category_id . '/products/add');?>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" maxlength="64">
-            <small class="form-text text-muted">Product name should not be more than 128 characters</small>
-        </div>
-
-        <div class="form-group">
-            <label for="category-input">Category</label>
-            <select id="category-input" required class="form-control" required name="category_id">
-                <option selected>Choose...</option>
-                <?php foreach ($categories as $category): ?>
-                    <?php $selected = ($category->id == $category_id) ? "selected" : ""; ?>
-                    <option value="<?=$category->id?>" <?= $selected ?>><?=$category->name?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="product-description">Short desciption</label>
-            <!-- <input type="text" class="form-control" id="product-description" name="product-description" placeholder="Enter Jumia product url"> -->
-            <textarea class="form-control" id="product-description" rows="3" name="product-description" placeholder="Describe the product briefly"></textarea>
-            <small class="form-text text-muted">Describe the product briefly</small>
-        </div>
-
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="image-upload-input" name="product-image">
-            <label class="custom-file-label" for="image-upload-input">Choose image</label>
-        </div>
-
-        <!-- <input type="file" name="product-image" size="20" /> -->
-
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
-        </div>
-
-        <div class="form-group">
-            <label for="old-price">Old price</label>
-            <input type="text" class="form-control" id="old-price" name="old-price" placeholder="Enter old-price">
-            <small class="form-text text-muted">You can leave this field empty</small>
-        </div>
-
-        <div class="form-group">
-            <label for="jumia-product-url">Jumia link</label>
-            <input type="text" class="form-control" id="jumia-product-url" name="jumia-product-url" placeholder="Enter Jumia product url">
-            <small class="form-text text-muted">Enter the url users are redirected to when the click your product</small>
-        </div>
-
-        <section>
-        <input id="custom-field-data" name="custom-field-data" type="hidden" value="[]">
-        <h3>Custom field</h3>
-            <!-- Button trigger modal -->
-            <div id="custom-fields">
-<!--                 <div class="custom-field">
-                    <div class="label">Test label</div>
-                    <div class="body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    </div>
+        <!-- <form method="POST" action="/categories/<?=$category_id?>/products/add"> -->
+        <?php echo form_open_multipart('/categories/' . $category_id . '/products/add');?>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" maxlength="64">
+                    <small class="form-text text-muted">Product name should not be more than 128 characters</small>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        Test label
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div> -->
-
-
-
+                <div class="form-group col-sm-6">
+                    <label for="category-input">Category</label>
+                    <select id="category-input" required class="form-control" required name="category_id">
+                        <option selected>Choose...</option>
+                        <?php foreach ($categories as $category): ?>
+                            <?php $selected = ($category->id == $category_id) ? "selected" : ""; ?>
+                            <option value="<?=$category->id?>" <?= $selected ?>><?=$category->name?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
 
-            <button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
-                data-toggle="modal" data-target="#categoryModel">
-                <i class="material-icons mr-1">add</i> <span>Add</span>
-            </button>
-        </section>
+            <div class="form-group">
+                <label for="product-description">Short desciption</label>
+                <!-- <input type="text" class="form-control" id="product-description" name="product-description" placeholder="Enter Jumia product url"> -->
+                <textarea class="form-control" id="product-description" rows="3" name="product-description" placeholder="Describe the product briefly"></textarea>
+                <small class="form-text text-muted">Describe the product briefly</small>
+            </div>
+
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="image-upload-input" name="product-image">
+                <label class="custom-file-label" for="image-upload-input">Choose image</label>
+            </div>
+
+            <!-- <input type="file" name="product-image" size="20" /> -->
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label for="old-price">Old price</label>
+                    <input type="text" class="form-control" id="old-price" name="old-price" placeholder="Enter old-price">
+                    <small class="form-text text-muted">You can leave this field empty</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="jumia-product-url">Jumia link</label>
+                <input type="text" class="form-control" id="jumia-product-url" name="jumia-product-url" placeholder="Enter Jumia product url">
+                <small class="form-text text-muted">Enter the url users are redirected to when the click your product</small>
+            </div>
+
+            <section>
+            <input id="custom-field-data" name="custom-field-data" type="hidden" value="[]">
+            <h3>Custom field</h3>
+                <!-- Button trigger modal -->
+                <div id="custom-fields">
+    <!--                 <div class="custom-field">
+                        <div class="label">Test label</div>
+                        <div class="body">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            Test label
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div> -->
 
 
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
+
+                </div>
+
+                <button type="button" class="btn btn-outline-primary d-flex justify-content-center align-content-between my-3" 
+                    data-toggle="modal" data-target="#categoryModel">
+                    <i class="material-icons mr-1">add</i> <span>Add</span>
+                </button>
+            </section>
+
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div> <!-- end of product-add-container -->
 
 </div>
 
@@ -258,5 +263,11 @@
     .custom-field-header {
         display: flex;
         justify-content: space-between;
+    }
+
+    .product-add-container {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>

@@ -1,0 +1,11 @@
+flash message for data creation
+data presentation (not design) on product detail (esp js of custom fields)
+delete costum field on front end
+sql injections in product and category's detete functions
+main product link page is still showing mock price
+convert all delete to post requests
+managing errors well from image upload (very importaint)
+edit category
+conflict between edit and add view
+change admin login details
+bootstrap's choose image not showing file name
