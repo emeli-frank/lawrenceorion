@@ -99,8 +99,10 @@ class Product extends CI_controller {
         // $this->load->view('templates/footer'); 
     }
 
-    public function editProduct($category_id, $product_id) {
+    public function editProduct($product_id) {
+
         if ($this->input->post('product_id') && $this->input->post('name') && $this->input->post('category_id')) {
+            $category_id = 1; // TODO:: remove!
             $product_id = $this->input->post('product_id');
             $name = $this->input->post('name');
             $result = $this->product_model->update($product_id, $category_id, $name);
@@ -109,7 +111,7 @@ class Product extends CI_controller {
         else {
             $data = ['data' => $this->product_model->getDetails($product_id)];
             $this->load->view('templates/header');
-            $this->load->view('pages/fragments/product-edit', $data['data'][0]);
+            $this->load->view('pages/fragments/product-add', $data);
             $this->load->view('templates/footer');
         }
     }
