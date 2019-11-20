@@ -14,7 +14,9 @@
     <?php foreach ($products as $product): ?>
         <a href="/categories/<?=$product->category_id?>/products/<?=$product->id?>" class="product-tile">
             <div class="card" _style="width: 12rem;">
-                <img src="/assets/images/products/product-placeholder-image.jpg" class="card-img-top">
+                <!-- <img src="/assets/images/products/product-placeholder-image.jpg" class="card-img-top"> -->
+                <img src="/product-images/<?=$product->image_path?>" class="card-img-top">
+                <!-- <img src="/product-images/product-placeholder-image.jpg" class="card-img-top"> -->
                 <div class="card-body">
                     <!-- <h5 class="card-title"><?=$product->name?></h5> -->
                     <div class="product-name"><?=$product->name?></div>

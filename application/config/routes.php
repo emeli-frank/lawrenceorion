@@ -73,6 +73,7 @@ $route['categories/(:num)/delete'] = 'category/deleteCategory/$1';
 $route['categories/all'] = 'product/showCategoriesAndProducts';
 $route['categories/(:num)'] = 'product/showCategoriesAndProducts/$1';
 $route['categories/(:num)/products/(:num)'] = 'product/showProductDetail/$1/$2';
+$route['products/add'] = 'product/doAddProduct';
 $route['products/(:num)/edit'] = 'product/editProduct/$1';
 $route['products/(:num)/delete'] = 'product/deleteProduct/$1';
 $route['categories/(:num)/products/add'] = 'product/addProduct/$1/$2';

@@ -114,8 +114,8 @@ class Product extends CI_controller {
         }
     }
 
-    public function addProduct($category_id = null) {
-        if (
+    public function doAddProduct() {
+        if ( $this->input->post('name') || 
             $this->input->post('name') 
             && $this->input->post('category_id')
             && $this->input->post('product-description')
@@ -126,11 +126,14 @@ class Product extends CI_controller {
             ) {
 
             $name = $this->input->post('name');
+            $category_id = $this->input->post('category_id');
             $product_description = $this->input->post('product-description');
             $price = $this->input->post('price');
             $old_price = $this->input->post('old-price');
             $jumia_product_url = $this->input->post('jumia-product-url');
-            $image_path = "product-placeholder-image.jpg";
+            // $image_path = "product-placeholder-image.jpg";
+            $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
+            $image_path = time() . '.' . $fileExt;
             $short_description = null;
             $custom_fields = $this->input->post('custom-field-data');
 
@@ -145,15 +148,22 @@ class Product extends CI_controller {
                 $custom_fields
                 );
 
-            $config['upload_path']          = './uploads/';
+            $insert_id = $this->db->insert_id();
+
+            // die($insert_id);
+
+            $config['upload_path']          = './product-images/';
             $config['allowed_types']        = 'gif|jpg|png';
             $config['max_size']             = 500;
-            $config['file_name']             = time();
+            $config['file_name']             = $image_path;
 
             $this->load->library('upload', $config);
 
             if ( ! $this->upload->do_upload('product-image')) {
                 $error = ['error' => $this->upload->display_errors()];
+
+                // TODO:: delete created record here
+                $this->product_model->delete($insert_id);
 
                 // $this->load->view('upload_form', $error);
 
@@ -164,54 +174,35 @@ class Product extends CI_controller {
             else {
                 $data = array('upload_data' => $this->upload->data());
                 
-
                 // $this->load->view('upload_success', $data);
             }
             $this->session->set_flashdata('success', 'Product was successfully created');
+            // die($category_id);
             redirect("categories/$category_id");
         }
-        else {
-            $data = [
-                'category_id' => $category_id,
-                'categories' => $this->category_model->getCategories(),
-            ];
-            $this->load->view('templates/header');
-            $this->load->view('pages/fragments/product-add', $data);
-            $this->load->view('templates/footer');
-        }
+    }
+
+    public function addProduct($category_id = null) {
+
+        $data = [
+            'category_id' => $category_id,
+            'categories' => $this->category_model->getCategories(),
+        ];
+        $this->load->view('templates/header');
+        $this->load->view('pages/fragments/product-add', $data);
+        $this->load->view('templates/footer');
         
 		/* print_r($this->category_model->getCategories()[0]);
         die(); */
         
     }
 
-    /* public function doUpload() {
-            $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 500;
-
-            $this->load->library('upload', $config);
-
-            if ( ! $this->upload->do_upload('product-image')) {
-                // die("no file");
-                $error = ['error' => $this->upload->display_errors()];
-
-                // $this->load->view('upload_form', $error);
-            }
-           else {
-               die("found file");
-                $data = array('upload_data' => $this->upload->data());
-
-                // $this->load->view('upload_success', $data);
-            }
-    } */
-
     public function deleteProduct($product_id) {
         $category_id = $this->product_model->productCategoryId($product_id);
+
         $this->product_model->delete($product_id);
         $this->session->set_flashdata('success', 'The item was successfully deleted');
-        // print( $this->session->flashdata('success') );
-        // die();
+
 		redirect("/categories/$category_id");
     }
 

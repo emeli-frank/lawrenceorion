@@ -9,3 +9,4 @@ edit category
 conflict between edit and add view
 change admin login details
 bootstrap's choose image not showing file name
+set max width on product list card

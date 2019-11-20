@@ -94,6 +94,10 @@ class Product_model extends CI_Model {
 		return $query->result();
 	}
 
+	public function setProductImage($product_id) {
+
+	}
+
 	public function getDetails($id) {
 		$query = $this->db
 			->select(['id', 'name', 'category_id', 'price', 'old_price', 'image_path', 'jumia_product_url', 'custom_fields', 'short_description'])

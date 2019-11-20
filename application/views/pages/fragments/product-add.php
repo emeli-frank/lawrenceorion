@@ -3,7 +3,7 @@
         <h2 style="margin-bottom: 50px">Add product</h2>
 
         <!-- <form method="POST" action="/categories/<?=$category_id?>/products/add"> -->
-        <?php echo form_open_multipart('/categories/' . $category_id . '/products/add');?>
+        <?php echo form_open_multipart('/products/add');?>
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label for="name">Name</label>

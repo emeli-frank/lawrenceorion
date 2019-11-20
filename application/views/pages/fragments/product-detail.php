@@ -1,8 +1,8 @@
-<div class="product-detail-bg"></div>
+<div class="product-detail-bg" style="background-image: url('/product-images/<?=$image_path?>');"></div>
 
 <div class="container page-container product-detail-container">
     <div>
-        <div><img class="image" src="/assets/images/products/<?=$image_path?>" alt=""></div>
+        <div><img class="image" src="/product-images/<?=$image_path?>" alt=""></div>
         <div>
             <!-- <div class="image" style="background-image: url('/assets/images/products/<?=$image_path?>')"></div> -->
             <div class="detail">
@@ -38,7 +38,7 @@
                                 Buy at jumia
                             </a>
                             <?php if ($this->authservice->isLoggedIn()) { ?>
-                            <a href="/products/<?= $category_id ?>/delete/" class="btn btn-outline-primary my-3">
+                            <a href="/products/<?= $id ?>/delete/" class="btn btn-outline-primary my-3">
                                 Delete
                             </a>
                             <a href="/products/<?= $category_id ?>/edit/" class="btn btn-outline-primary my-3">
@@ -58,7 +58,7 @@
 
 <style>
     .product-detail-bg {
-        background-image: url("/assets/images/products/product-placeholder-image.jpg");
+        /* background-image: url("/assets/images/products/product-placeholder-image.jpg"); */
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
