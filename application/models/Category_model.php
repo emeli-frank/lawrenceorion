@@ -15,6 +15,14 @@ class Category_model extends CI_Model {
     	$this->name = $name;
         $this->db->insert('categories', $this);
 	}
+
+	public function getCategory($category_id) {
+		$query = $this->db
+			->select(['id', 'name'])
+			->from('categories')
+			->where('id', $category_id)->get();
+		return $query->row();
+	}
 	
 	public function getCategories() {
 		$query = $this->db

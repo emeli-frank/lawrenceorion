@@ -31,9 +31,8 @@ class Category extends CI_controller {
         $this->load->view('templates/footer');
     }
 
-    public function bar($category_id) {
+    public function createOrUpdate($category_id) {
         $data  = [
-            // 'action' => ($category_id) ? 'edit' : 'add',
             'category_id' => $category_id,
             'category_name' => 'category_name',
         ];
@@ -57,16 +56,9 @@ class Category extends CI_controller {
             $this->session->set_flashdata('success', 'Category created'); 
             redirect("/categories"); //TODO:: se if you can call back refere url 
         }
-        else {
-            $this->load->view('templates/header');
-            $this->load->view('pages/category/category-create', $data);
-            $this->load->view('templates/footer');
-        }
     }
 
-    private function loadForm($category_id) {
-        $data = ['category_id' => $category_id];
-
+    private function loadForm($data, $category_id) {
         $this->load->view('templates/header');
         $this->load->view('pages/category/category-create', $data);
         $this->load->view('templates/footer');
@@ -74,19 +66,22 @@ class Category extends CI_controller {
 
     public function addCategory() {
         if ($this->input->post('category-name')) {
-            $this->bar(null);
+            $this->createOrUpdate(null);
         }
         else {
-            $this->loadForm(null);
+            $this->loadForm(null, null);
         }
     }
 
     public function editCategory($category_id) {
+        $category = $this->category_model->getCategory($category_id);
+        $data = ['category' => $category];
+
         if ($this->input->post('category-name') && $this->input->post('category-id')) {
-            $this->bar($category_id);
+            $this->createOrUpdate($category->id);
         }
         else {
-            $this->loadForm($category_id);
+            $this->loadForm($data, $category_id);
         }
     }
 
