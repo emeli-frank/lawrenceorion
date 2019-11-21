@@ -91,33 +91,24 @@ class Product extends CI_controller {
         if (!$this->product_model->productExist($product_id)) {
             show_404();
         }
-        $data = ['data' => $this->product_model->getDetails($product_id)];
+        $data = [
+            // $this->product_model->getDetails($product_id),
+            'product' => $this->product_model->getDetails($product_id),
+            'category' => $this->category_model->getCategory($category_id)
+        ];
+
+        // print_r($this->product_model->getDetails($product_id));
+        // die();
 
         $this->load->view('templates/header');
-        $this->load->view('pages/fragments/product-detail', $data['data'][0]);
+        $this->load->view('pages/fragments/product-detail', $data);
         // hiding footer because it snaps to top when background image and content container are floated
         // $this->load->view('templates/footer'); 
     }
 
-    public function editProduct($product_id) {
-
-        if ($this->input->post('product_id') && $this->input->post('name') && $this->input->post('category_id')) {
-            $category_id = 1; // TODO:: remove!
-            $product_id = $this->input->post('product_id');
-            $name = $this->input->post('name');
-            $result = $this->product_model->update($product_id, $category_id, $name);
-            print('affected row: <h1>' . $result . '</h1>');
-        }
-        else {
-            $data = ['data' => $this->product_model->getDetails($product_id)];
-            $this->load->view('templates/header');
-            $this->load->view('pages/fragments/product-add', $data);
-            $this->load->view('templates/footer');
-        }
-    }
-
     public function doAddProduct() {
-        if ( $this->input->post('name') || 
+        if ( 
+            // $this->input->post('name') || 
             $this->input->post('name') 
             && $this->input->post('category_id')
             && $this->input->post('product-description')
@@ -125,19 +116,20 @@ class Product extends CI_controller {
             && $this->input->post('old-price')
             && $this->input->post('jumia-product-url')
             && $this->input->post('custom-field-data')
+            && isset($_FILES["product-image"])
             ) {
 
+            // if ($this->input->post('product_id')) { $product_id = $this->input->post('product_id')}
             $name = $this->input->post('name');
             $category_id = $this->input->post('category_id');
             $product_description = $this->input->post('product-description');
             $price = $this->input->post('price');
             $old_price = $this->input->post('old-price');
             $jumia_product_url = $this->input->post('jumia-product-url');
-            // $image_path = "product-placeholder-image.jpg";
+            $custom_fields = $this->input->post('custom-field-data');
+
             $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
             $image_path = time() . '.' . $fileExt;
-            $short_description = null;
-            $custom_fields = $this->input->post('custom-field-data');
 
             $result = $this->product_model->create(
                 $name,
@@ -146,42 +138,55 @@ class Product extends CI_controller {
                 $price,
                 $old_price,
                 $jumia_product_url,
-                $short_description,
+                $product_description,
                 $custom_fields
                 );
 
             $insert_id = $this->db->insert_id();
 
-            // die($insert_id);
+            $status = $this->doUpload($image_path, $insert_id);
 
-            $config['upload_path']          = './product-images/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 500;
-            $config['file_name']             = $image_path;
-
-            $this->load->library('upload', $config);
-
-            if ( ! $this->upload->do_upload('product-image')) {
-                $error = ['error' => $this->upload->display_errors()];
-
-                // TODO:: delete created record here
-                $this->product_model->delete($insert_id);
-
-                // $this->load->view('upload_form', $error);
-
-                /* print_r($error);
-                $err_str = json_encode($error); */  
-
+            if ($status['success']) {
+                $this->session->set_flashdata('success', 'Product was successfully created');
             }
             else {
-                $data = array('upload_data' => $this->upload->data());
-                
-                // $this->load->view('upload_success', $data);
+                $this->session->set_flashdata('error', 'Product was not created');
             }
-            $this->session->set_flashdata('success', 'Product was successfully created');
-            // die($category_id);
+            
             redirect("categories/$category_id");
         }
+        else {
+            $this->session->set_flashdata('error', 'An error occured, refill relevant fields and try again');
+            if (isset($category_id)) {
+                redirect("categories/$category_id");
+            }
+            else {
+                redirect("categories/all");
+            }
+        }
+    }
+
+    private function doUpload($image_path, $insert_id) {
+        $config['upload_path']          = './product-images/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 500;
+        $config['file_name']             = $image_path;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('product-image')) {
+            $error = ['error' => $this->upload->display_errors()];
+
+            if ($insert_id) {
+                $this->product_model->delete($insert_id);
+            }
+
+            return ['success' => false, error => $error];
+        }
+        
+        $data = array('upload_data' => $this->upload->data());
+
+        return ['success' => true];
     }
 
     public function addProduct($category_id = null) {
@@ -193,10 +198,121 @@ class Product extends CI_controller {
         $this->load->view('templates/header');
         $this->load->view('pages/fragments/product-add', $data);
         $this->load->view('templates/footer');
+    }
+    
+    public function editProduct($product_id) {
+        $data = [
+            'product' => $this->product_model->getProduct($product_id),
+            'categories' => $this->category_model->getCategories()
+        ];
         
-		/* print_r($this->category_model->getCategories()[0]);
-        die(); */
-        
+        $this->load->view('templates/header');
+        $this->load->view('pages/fragments/product-add', $data);
+        $this->load->view('templates/footer');
+
+        // $this->doEditProduct($product_id);
+
+
+
+
+
+    }
+
+    public function doEditProduct($product_id) {
+        if ( 
+            // $this->input->post('name') || 
+            $this->input->post('product-id')
+            && $this->input->post('name') 
+            && $this->input->post('category_id')
+            && $this->input->post('product-description')
+            && $this->input->post('price')
+            && $this->input->post('old-price')
+            && $this->input->post('jumia-product-url')
+            && $this->input->post('custom-field-data')
+            ) {
+
+            $product_id = $this->input->post('product-id');
+            $name = $this->input->post('name');
+            $category_id = $this->input->post('category_id');
+            $product_description = $this->input->post('product-description');
+            $price = $this->input->post('price');
+            $old_price = $this->input->post('old-price');
+            $jumia_product_url = $this->input->post('jumia-product-url');
+            $custom_fields = $this->input->post('custom-field-data');
+            $image_path = null;
+
+            /* if (empty($_FILES["product-image"]["name"])) {
+                die('empty');
+            }
+            else {
+                die('not empty');
+            } */
+
+            /* print_r($_FILES["product-image"]);
+            die(); */
+            
+            if ( !empty($_FILES["product-image"]['name']) ) {
+                // die('file is not empty');
+                $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
+                $image_path = time() . '.' . $fileExt;
+            }
+            else {
+                // die('file is empty');
+            }
+
+            // die($fileExt);
+
+            /* $foo = (isset($image_path)) ? $image_path : null;
+            print_r($foo);
+            die(); */
+
+            $result = $this->product_model->update(
+                $product_id,
+                $name, 
+                $category_id,
+                $image_path,
+                $price,
+                $old_price,
+                $jumia_product_url,
+                $product_description,
+                $custom_fields
+            );
+
+            if ( !empty($_FILES["product-image"]['name']) ) {
+                // die('not empty, uploading');
+                $status = $this->doUpload($image_path, null);
+            } /* else { die('empty, not uploading');} */
+
+            if ($status['success']) {
+                $this->session->set_flashdata('success', 'Product was successfully created');
+            }
+            else {
+                $this->session->set_flashdata('error', 'Product was not created');
+            }
+            
+            redirect("/categories/$category_id/products/$product_id");
+        }
+        else {
+            die('does not have all requried data');
+            $this->session->set_flashdata('error', 'An error occured, refill relevant fields and try again');
+            if (isset($category_id)) {
+                redirect("categories/$category_id");
+            }
+            else {
+                redirect("categories/all");
+            }
+        }
+
+
+
+
+        /* if ($this->input->post('product_id') && $this->input->post('name') && $this->input->post('category_id')) {
+            $category_id = 1; // TODO:: remove!
+            $product_id = $this->input->post('product_id');
+            $name = $this->input->post('name');
+            $result = $this->product_model->update($product_id, $category_id, $name);
+            print('affected row: <h1>' . $result . '</h1>');
+        } */
     }
 
     public function deleteProduct($product_id) {
@@ -208,4 +324,49 @@ class Product extends CI_controller {
 		redirect("/categories/$category_id");
     }
 
+/*     private function productData() {
+        if ( 
+            // $this->input->post('name') || 
+            $this->input->post('name') 
+            && $this->input->post('category_id')
+            && $this->input->post('product-description')
+            && $this->input->post('price')
+            && $this->input->post('old-price')
+            && $this->input->post('jumia-product-url')
+            && $this->input->post('custom-field-data')
+            ) {
+
+                $name = $this->input->post('name');
+                $category_id = $this->input->post('category_id');
+                $product_description = $this->input->post('product-description');
+                $price = $this->input->post('price');
+                $old_price = $this->input->post('old-price');
+                $jumia_product_url = $this->input->post('jumia-product-url');
+                $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
+                $image_path = time() . '.' . $fileExt;
+                // $short_description = null;
+                $custom_fields = $this->input->post('custom-field-data');
+            }
+    } */
+
 }
+
+/* class Product {
+    public $name;
+    public $category_id;
+    public $product_description;
+    public $price;
+    public $old_price;
+    public $jumia_product_url;
+
+    public function __construct(
+        $name, 
+        $category_id, 
+        $product_description, 
+        $price, 
+        $old_price, 
+        $jumia_product_url, 
+    ) {
+
+    }
+} */

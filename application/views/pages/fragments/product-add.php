@@ -1,13 +1,16 @@
+<div id="custom-fields-data" class="hidden"><?= (isset($product)) ? $product->custom_fields : '[]' ?></div>
+
 <div class="container page-container">
     <div class="product-add-container">
-        <h2 style="margin-bottom: 50px">Add product</h2>
+        <h2 style="margin-bottom: 50px"><?php echo (isset($product)) ? 'Edit' : 'Add'?> product</h2>
+        <?php $action = (isset($product)) ? "/products/$product->id/edit/do" : '/products/add' ?>
 
-        <!-- <form method="POST" action="/categories/<?=$category_id?>/products/add"> -->
-        <?php echo form_open_multipart('/products/add');?>
+        <?php echo form_open_multipart($action);?>
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" maxlength="64">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" maxlength="64"
+                        value="<?= (isset($product)) ? $product->name : ''?>">
                     <small class="form-text text-muted">Product name should not be more than 128 characters</small>
                 </div>
 
@@ -15,9 +18,21 @@
                     <label for="category-input">Category</label>
                     <select id="category-input" required class="form-control" required name="category_id">
                         <option selected>Choose...</option>
-                        <?php foreach ($categories as $category): ?>
-                            <?php $selected = ($category->id == $category_id) ? "selected" : ""; ?>
-                            <option value="<?=$category->id?>" <?= $selected ?>><?=$category->name?></option>
+                        <?php foreach ($categories as $c): ?>
+                            <!-- <?php // $selected = ($category->id == $category_id) ? "selected" : ""; ?> -->
+
+                            <?php 
+                            $selected = '';
+
+                            if (isset($product) && $c->id == $product->category_id) {
+                                $selected = 'selected';
+                            }
+                            else if (! isset($product) && $c->id == $category_id) {
+                                $selected = 'selected';
+                            }
+                            ?>
+
+                            <option value="<?=$c->id?>" <?= $selected ?>><?=$c->name?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -26,37 +41,62 @@
             <div class="form-group">
                 <label for="product-description">Short desciption</label>
                 <!-- <input type="text" class="form-control" id="product-description" name="product-description" placeholder="Enter Jumia product url"> -->
-                <textarea class="form-control" id="product-description" rows="3" name="product-description" placeholder="Describe the product briefly"></textarea>
+                <textarea class="form-control" id="product-description" rows="3" name="product-description" placeholder="Describe the product briefly"><?= (isset($product)) ? $product->short_description : ''?></textarea>
                 <small class="form-text text-muted">Describe the product briefly</small>
             </div>
 
             <div class="custom-file">
+                <label id="image-upload-input-label" class="custom-file-label" for="image-upload-input"><?= (isset($product)) ? 'Change image' : 'Choose image'?></label>
                 <input type="file" class="custom-file-input" id="image-upload-input" name="product-image">
-                <label class="custom-file-label" for="image-upload-input">Choose image</label>
             </div>
+
+            <script>
+                /* $('#image-upload-input').on('change',function(){
+                    console.log("callback function is running");
+                    //get the file name
+                    var fileName = $(this).val();
+                    console.log('file: ');
+                    console.log(fileName);
+                    $('#image-upload-input-label').html(fileName);
+                }) */
+
+                $('#image-upload-input').change(function(e){
+                    var fileName = e.target.files[0].name;
+                    console.log(fileName);
+                    $('#image-upload-input-label').html(fileName);
+                });
+            </script>
+
+            <!-- <div class="form-group">
+                <label class="custom-file-label" for="image-upload-input"><?= (isset($product)) ? 'Change image' : 'Choose image'?></label>
+                <input type="file" id="image-upload-input" name="product-image" value="<?= (isset($product)) ? 'Change image' : 'Choose image'?>">
+            </div> -->
 
             <!-- <input type="file" name="product-image" size="20" /> -->
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Enter price"
+                    value="<?= (isset($product)) ? $product->price : ''?>">
                 </div>
 
                 <div class="form-group col-sm-6">
                     <label for="old-price">Old price</label>
-                    <input type="text" class="form-control" id="old-price" name="old-price" placeholder="Enter old-price">
+                    <input type="text" class="form-control" id="old-price" name="old-price" placeholder="Enter old-price"
+                    value="<?= (isset($product)) ? $product->old_price : ''?>">
                     <small class="form-text text-muted">You can leave this field empty</small>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="jumia-product-url">Jumia link</label>
-                <input type="text" class="form-control" id="jumia-product-url" name="jumia-product-url" placeholder="Enter Jumia product url">
+                <input type="text" class="form-control" id="jumia-product-url" name="jumia-product-url" placeholder="Enter Jumia product url"
+                value="<?= (isset($product)) ? $product->jumia_product_url : ''?>">
                 <small class="form-text text-muted">Enter the url users are redirected to when the click your product</small>
             </div>
 
             <section>
-            <input id="custom-field-data" name="custom-field-data" type="hidden" value="[]">
+            <input id="custom-fields-data-input" name="custom-field-data" type="hidden" value="[]">
             <h3>Custom field</h3>
                 <!-- Button trigger modal -->
                 <div id="custom-fields">
@@ -92,6 +132,10 @@
 
 
             <button type="submit" class="btn btn-primary">Save</button>
+
+            <?php if (isset($product->id)): ?>
+            <input type="hidden" name="product-id" value="<?= $product->id ?>">
+            <?php endif ?>
         </form>
     </div> <!-- end of product-add-container -->
 
@@ -151,15 +195,24 @@
     fields = [];
     nextId = 1;
 
-    /* function generateNext() {
-        next = 1;
-        
-        return function() {
-            return next++;
+    // Specially for editing page
+    getDataFromUI();
+
+    function getDataFromUI() {
+        fields = JSON.parse(document.querySelector('#custom-fields-data').textContent);
+        console.log(fields);
+
+        addIdsToArrays();
+        build();
+    }
+
+    function addIdsToArrays() {
+        for (i = 0; i < fields.length; i++) {
+            fields[i].id = nextId++;
         }
     }
 
-    let next = generateNext(); */
+
 
     function deleteCustomField(id) {
         for (var i = 0; i < fields.length; i++) {
@@ -249,7 +302,9 @@
             });
         }
 
-        document.querySelector('#custom-field-data').setAttribute('value', JSON.stringify(fields))
+        // document.querySelector('#custom-field-data').setAttribute('value', JSON.stringify(fields))
+        document.querySelector('#custom-fields-data').textContent = JSON.stringify(fields);
+        document.querySelector('#custom-fields-data-input').value = JSON.stringify(fields);
     }
 </script>
 

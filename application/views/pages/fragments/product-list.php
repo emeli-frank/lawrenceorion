@@ -15,11 +15,12 @@
         <a href="/categories/<?=$product->category_id?>/products/<?=$product->id?>" class="product-tile">
             <div class="card" _style="width: 12rem;">
                 <!-- <img src="/assets/images/products/product-placeholder-image.jpg" class="card-img-top"> -->
-                <img src="/product-images/<?=$product->image_path?>" class="card-img-top">
+                <!-- <img src="/product-images/<?=$product->image_path?>" class="card-img-top"> -->
+                <div class="image-container" style="background-image: url(/product-images/<?=$product->image_path?>)"></div>
                 <!-- <img src="/product-images/product-placeholder-image.jpg" class="card-img-top"> -->
                 <div class="card-body">
                     <!-- <h5 class="card-title"><?=$product->name?></h5> -->
-                    <div class="product-name"><?=$product->name?></div>
+                    <div class="product-name" title="<?=$product->name?>"><?=$product->name?></div>
                     <div class="price">
                         <span class="price-current">
                             <span data-currency-iso="NGN">₦</span>
@@ -43,19 +44,24 @@
 
 <style>
 
-
+    .image-container {
+        height: 200;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 
 
     .product-list-containter {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        /* justify-content: space-between; */
     }
 
     .product-tile {
-        display: flex-item;
-
         flex: 1 18%;
+        max-width: 250px;
+        min-width: 180px;
     }
 
     .product-tile, :hover {
@@ -66,6 +72,9 @@
         font-weight: 500;
         line-height: 1.2;
         color: inherit;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .price {

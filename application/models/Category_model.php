@@ -27,7 +27,9 @@ class Category_model extends CI_Model {
 	public function getCategories() {
 		$query = $this->db
 			->select(['id', 'name'])
-			->from('categories')->get();
+			->from('categories')
+			->order_by('id', 'DESC')
+			->get();
 		return $query->result();
 	}
 

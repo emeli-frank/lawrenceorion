@@ -59,11 +59,24 @@ class Product_model extends CI_Model {
 			->from('categories')
 			->join('products', 'categories.id = products.category_id', 'left')
 			->group_by('categories.id')
+			->order_by('id', 'DESC')
 			->get();
 			/* print_r($query->result()[0]);
 			die(); */
         return $query->result();
         // return $query->row_array();
+	}
+
+	public function getProduct($product_id) {
+		$select = ['id', 'name', 'category_id', 'image_path', 'price', 'old_price', 'jumia_product_url', 'short_description', 'custom_fields'];
+
+		$query = $this->db
+				->select($select)
+				->from('products')
+				->where('id', $product_id)
+				->get();
+
+		return $query->row();
 	}
 
 	public function getProducts($category_id = null, $start_index, $number) {
@@ -75,6 +88,7 @@ class Product_model extends CI_Model {
 			$query = $this->db
 				->select($select)
 				->from('products')
+				->order_by('id', 'DESC')
 				->limit($number, $start_index)->get();
 			
 			// echo("null<br>");print_r(count($query->result()));die();
@@ -84,6 +98,7 @@ class Product_model extends CI_Model {
 				->select($select)
 				->from('products')
 				->where('category_id', $category_id)
+				->order_by('id', 'DESC')
 				->limit($number, $start_index)->get();
 			// print_r($query->result());die();
 		}
@@ -94,25 +109,58 @@ class Product_model extends CI_Model {
 		return $query->result();
 	}
 
-	public function setProductImage($product_id) {
-
-	}
-
 	public function getDetails($id) {
 		$query = $this->db
 			->select(['id', 'name', 'category_id', 'price', 'old_price', 'image_path', 'jumia_product_url', 'custom_fields', 'short_description'])
 			->from('products')
 			->where('id', $id)->get();
 
-		return $query->result();
+		/* print_r($query->result());
+		die(); */
+
+		return $query->row();
 	}
 
-	public function update($id, $category_id, $name)
+	public function update(
+		$product_id,
+		$name, 
+		$category_id,
+		$image_path,
+		$price,
+		$old_price,
+		$jumia_product_url,
+		$short_description,
+		$custom_fields
+	)
     {
+		
+		$this->id = $product_id;
+		$this->name = $name;
+		$this->category_id = $category_id;
+		if ($image_path) {
+			$this->image_path = $image_path;
+		}
+		else {
+			unset($this->image_path);
+		}
+		$this->old_price = $old_price;
+		$this->price = $price;
+		$this->jumia_product_url = $jumia_product_url;
+		$this->short_description = $short_description;
+		$this->custom_fields = $custom_fields;
+
+		/* print_r($this);
+		die(); */
+
+		// print_r($this); die();
+        // $this->db->insert('products', $this);
+		
 		/* $this->id = $id;
 		$this->name = $name; */
-		$this->db->where('id', $id);
-		$this->db->update('products', ['name' => $name, 'category_id' => $category_id]);
+
+
+		$this->db->where('id', $product_id);
+		$this->db->update('products', $this, ['id' => $product_id]);
 		return ($this->db->affected_rows() >= 0);
     }
 
