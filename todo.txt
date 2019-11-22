@@ -1,12 +1,43 @@
 flash message for data creation
-data presentation (not design) on product detail (esp js of custom fields)
-delete costum field on front end
+
 sql injections in product and category's detete functions
-main product link page is still showing mock price
+
 convert all delete to post requests
+
 managing errors well from image upload (very importaint)
-edit category
-conflict between edit and add view
+
 change admin login details
+
+more robust error message
+
+product list for mobile view
+
+product detail page for mobile view
+
+
+__________________________________________________________________________
+
+
+in detail page, those buttons should not be in tab body but outside it so tht even while navigating tabs, the buttons are seen
+
 bootstrap's choose image not showing file name
+
+auto fill name of category when updating
+
+large single image occupies the whole view port, limit
+
+product detail inner square, set min height of elem to 400px
+
+conflict between edit and add view
+
+main product link page is still showing mock price
+
+order product by date added by default
+
 set max width on product list card
+
+edit category
+
+delete costum field on front end
+
+data presentation (not design) on product detail (esp js of custom fields)

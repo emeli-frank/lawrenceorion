@@ -1,11 +1,14 @@
 <div id="custom-fields-data" class="hidden"><?= $product->custom_fields ?></div>
 
-<div class="product-detail-bg" style="background-image: url('/product-images/<?=$product->image_path?>');"></div>
+<!-- <div class="product-detail-bg" style="background-image: url('/product-images/<?=$product->image_path?>');"></div> -->
+<!-- <div class="product-detail-overlay"></div> -->
 
 <div class="container _page-container product-detail-container">
-    <div>
-        <div><img class="image" src="/product-images/<?=$product->image_path?>" alt=""></div>
-        <div>
+    <div id="image-detail-container">
+        <div class="image-container">
+            <img class="image" src="/product-images/<?=$product->image_path?>" alt="">
+        </div>
+        <div class="detail-container">
             <!-- <div class="image" style="background-image: url('/assets/images/products/<?=$product->image_path?>')"></div> -->
             <div class="detail">
                 <!-- <h2>Product detail</h2> -->
@@ -59,64 +62,55 @@
     </div>
 </div>
 
+<!-- <style>
+
+
+
+
+
+
+    @media screen and (max-width: 768px) {
+        .product-detail-container > div {
+            flex-direction: column;
+        }
+    }
+
+
+</style> -->
+
 <style>
-    .product-detail-bg {
-        /* background-image: url("/assets/images/products/product-placeholder-image.jpg"); */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        filter: blur(8px);
-        -webkit-filter: blur(15px);
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    @media screen and (min-width: 768px) {
+        .product-detail-container > div {
+            /* background-color: white;
+            align-self: center;
+            width: 100%; */
+            display: flex;
+            padding: 30px 30px;
+            min-height: 450px;
+            /* max-height: 600px; */
+            overflow: auto;
+        }
+
+        .image-container {
+            width: 200px;
+            margin-right: 30px;
+            flex-shrink: 0;
+        }
+    }
+
+    .image-container > .image {
+        width: 100%;
     }
 
     .product-detail-container {
-        position: absolute;
-        z-index: 2;
-        background-color: transparent;
-        left: 0; 
-        right: 0;
-        bottom: 0;
-        top: 0;
-        display: flex;
-        /* margin-left: auto;  */
-        /* margin-right: auto; */
-        /* justify-content: center; */
-        /* Override boostrap padding on container */
-        /* padding-left: 0; */
-        /* padding-right: 0; */
+        margin-top: 100px;
     }
 
-    .product-detail-container > div {
-        background-color: white;
-        align-self: center;
-        width: 100%;
-        display: flex;
-        padding: 30px 30px;
-        min-height: 450px;
-        /* max-height: 600px; */
-        overflow: auto;
-
-    }
-
-    .image {
-        width: 200px;
-        /* height: 200px; */
-        margin-right: 30px;
-    }
-
-    .image > img {
-        width: 100%;
-    }
-    
     .price-container {
         display: flex;
         align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .price-container > .product-price {
@@ -132,7 +126,6 @@
         color: white;
         border-radius: 15px;
         width: fit-content;
-        /* padding: 3px 12px; */
         font-size: 12px;
         padding: 2px 10px 3px 10px;
         display: block;
@@ -147,9 +140,16 @@
         box-shadow: 0px 1px 6px grey;
     }
 
-    .custom-field-body {
-        max-height: 150px;
-        overflow: auto;
+    @media screen and (min-width: 768px) {
+        .custom-field-body {
+            max-height: 150px;
+            overflow: auto;
+        }
+    }
+
+    .product-name {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 </style>
 
@@ -161,7 +161,7 @@
     } */
 
     fields = JSON.parse(document.querySelector('#custom-fields-data').textContent);
-    console.log(fields);
+    // console.log(fields);
     build();
 
     function build() {
@@ -195,4 +195,13 @@
         }
 
     }
+
+    /* window.onload = function () {
+        let h = window.innerHeight;
+        let foo = document.querySelector('#image-detail-container');
+
+        console.log(h)
+
+        foo.style.height = (h - 400 -36) + 'px';
+    } */
 </script>

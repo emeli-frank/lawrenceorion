@@ -7,13 +7,19 @@
         </button>
     </div>
     <?php endif ?>
-    <div class=" flex-container">
+    <div id="product-category-container">
         <section id="category"><?=$category_view?></section>
         <section id="product"><?=$product_view?></section>
     </div>
 </div>
 
+<div id="fab" onclick="toggleFilter()"><i class="material-icons">filter_list</i></div>
+
 <style>
+    #product-category-container {
+        display: flex;
+    }
+    
     #product-list-container {
         margin-left: 10px;
         margin-right: 10px;
@@ -26,6 +32,12 @@
         width: 100%;
     }
 
+    @media screen and (max-width: 768px) {
+        #category {
+            display: none;
+        }
+    }
+
     #category {
         padding-left: 10px;
         padding-right: 10px;
@@ -33,4 +45,71 @@
         flex-shrink: 0;
         /* border: 1px solid black; */
     }
+
+    #fab {
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+        background-color: #E86E2F;
+        color: white;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        bottom: 16px;
+        right: 16px;
+        box-shadow: 0px 2px 3px 1px #747474;
+        cursor: pointer;
+        z-index: 10001;
+    }
+
+    #floating-filter {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: white;
+        display: block;
+        z-index: 10000;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
 </style>
+
+<script>
+    let filterOpened = false;
+    let cln;
+    let filter = document.querySelector('#category');
+    let body = document.querySelector('body');
+
+    function toggleFilter() {
+        if (filterOpened) {
+            closeFilter();
+        }
+        else {
+            openFilter();
+        }
+
+        function openFilter() {
+            if (!cln) {
+                cln = filter.cloneNode(true);
+                cln.setAttribute("id" , "floating-filter");
+                cln.classList.add('floating');
+                body.appendChild(cln);
+            }
+            else {
+                cln.classList.remove('hidden');
+            }
+            filterOpened = true;
+        }
+
+        function closeFilter() {
+            document.querySelector('#floating-filter').classList.add('hidden');
+            filterOpened = false;
+        }
+    }
+
+</script>

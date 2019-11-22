@@ -102,6 +102,7 @@ class Product extends CI_controller {
 
         $this->load->view('templates/header');
         $this->load->view('pages/fragments/product-detail', $data);
+        $this->load->view('templates/footer');
         // hiding footer because it snaps to top when background image and content container are floated
         // $this->load->view('templates/footer'); 
     }
