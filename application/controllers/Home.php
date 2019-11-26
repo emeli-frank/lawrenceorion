@@ -8,14 +8,13 @@ class Home extends CI_controller {
 
         $this->load->model('product_model');
 
-        $random_products = $this->product_model->getRandomProducts(16);
-        $data = [
-            // 'products' => $random_products
-        ];
-
         $product_views = [];
 
-        $random_products = $this->product_model->getRandomProducts(16);
+        $random_products = $this->product_model->getRandomProducts(15);
+        // make sure number of items is even
+        if (count($random_products) % 2) {
+            $pop = array_pop($random_products);
+        }
         for ($i = 0; $i < count($random_products); $i++) {
             $card_data = [
                 'product' => $random_products[$i]

@@ -15,7 +15,7 @@ class Manage extends CI_controller {
     		$this->category_model->create("Category $i");
 			$category_id = $this->db->insert_id();
 			
-			$number_of_product = rand(0, 10);
+			$number_of_product = rand(0, 20);
 			$custom_field = [
 				'label' => 'Lorem ipsum dolor',
 				'body' => '
@@ -58,6 +58,34 @@ class Manage extends CI_controller {
 
     private function clean($table) {
     	$query = $this->db->query("DELETE FROM $table");
-    }
+	}
+
+	public function test() {
+			$this->load->helper(array('form', 'url'));
+
+			$this->load->library('form_validation');
+			$this->form_validation->set_error_delimiters('<div style="color: red">', '</div>');
+
+			$this->form_validation->set_rules(
+					'username', 'Username',
+					'required|min_length[5]|max_length[12]',
+					array(
+							'required'      => 'You have not provided %s.',
+							'is_unique'     => 'This %s already exists.'
+					)
+			);
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+					$this->load->view('test/form');
+			}
+			else
+			{
+					$this->load->view('test/success');
+			}
+	}
 
 }

@@ -59,7 +59,7 @@ $route['contact-us'] = 'contact';
 
 // $route['products'] = 'product';
 
-$route['~temp'] = 'publication/preview';
+$route['~temp'] = 'manage/test';
 
 
 $route['categories'] = 'category/showCategories';

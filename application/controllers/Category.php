@@ -65,8 +65,16 @@ class Category extends CI_controller {
     }
 
     public function addCategory() {
+        $this->load->library('form_validation');
         if ($this->input->post('category-name')) {
-            $this->createOrUpdate(null);
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+            $this->form_validation->set_rules('category-name', 'Category Name', 'trim|required|min_length[1]|max_length[128]');
+            if ($this->form_validation->run() == FALSE) {
+                $this->loadForm(null, null); 
+            }
+            else {
+                $this->createOrUpdate(null);
+            }
         }
         else {
             $this->loadForm(null, null);
@@ -74,11 +82,19 @@ class Category extends CI_controller {
     }
 
     public function editCategory($category_id) {
+        $this->load->library('form_validation');
         $category = $this->category_model->getCategory($category_id);
         $data = ['category' => $category];
 
         if ($this->input->post('category-name') && $this->input->post('category-id')) {
-            $this->createOrUpdate($category->id);
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+            $this->form_validation->set_rules('category-name', 'Category Name', 'trim|required|min_length[1]|max_length[128]');
+            if ($this->form_validation->run() == FALSE) {
+                $this->loadForm($data, $category_id);
+            }
+            else {
+                $this->createOrUpdate($category->id);
+            }
         }
         else {
             $this->loadForm($data, $category_id);

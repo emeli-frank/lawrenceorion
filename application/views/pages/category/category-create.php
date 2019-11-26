@@ -1,6 +1,7 @@
 <div class="page-container container create-page">
     <?php $title = (isset($category->id)) ? 'Edit category' : 'Add new category'; ?>
     <h1><?= $title ?></h1>
+    <?php echo validation_errors(); ?>
     <form 
         action="/categories/<?php echo (isset($category)) ? $category->id . '/edit' : 'add' ?>" 
         method="POST"
