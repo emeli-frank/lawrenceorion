@@ -14,6 +14,16 @@ product list for mobile view
 
 product detail page for mobile view
 
+pagination
+
+add a featured table to the database
+
+add "no-wrap" class to layout of scss
+
+change some database numbers to unsigned
+
+error message after unsuccessful login
+
 
 __________________________________________________________________________
 

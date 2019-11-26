@@ -63,6 +63,12 @@
         z-index: 10001;
     }
 
+    @media screen and (min-width: 768px) {
+        #fab {
+            disaplay: none;
+        }
+    }
+
     #floating-filter {
         position: fixed;
         top: 0;
@@ -75,6 +81,9 @@
         z-index: 10000;
         padding-left: 16px;
         padding-right: 16px;
+        overflow: auto;
+        overflow: auto;
+        padding-top: 20px;
     }
 
 </style>
@@ -98,6 +107,14 @@
                 cln = filter.cloneNode(true);
                 cln.setAttribute("id" , "floating-filter");
                 cln.classList.add('floating');
+
+                let closeBtn = document.createElement('div');
+                closeBtn.classList.add("btn");
+                closeBtn.classList.add("btn-outline-primary");
+                closeBtn.textContent = "Close";
+                
+                closeBtn.addEventListener('click', closeFilter);
+                cln.insertBefore(closeBtn, cln.childNodes[0]);
                 body.appendChild(cln);
             }
             else {

@@ -8,7 +8,7 @@ USE website;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-	id tinyint NOT NULL AUTO_INCREMENT,
+	id tinyint UNSIGNED NOT NULL AUTO_INCREMENT,
 	email varchar(128) NOT NULL,
 	password varchar(128) NOT NULL,
 
@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
-	id smallint NOT NULL AUTO_INCREMENT,
+	id smallint UNSIGNED NOT NULL AUTO_INCREMENT,
 	name varchar(128) NOT NULL,
 
 	PRIMARY KEY (id)
@@ -25,16 +25,25 @@ CREATE TABLE categories (
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
-	id int NOT NULL AUTO_INCREMENT,
+	id int UNSIGNED NOT NULL AUTO_INCREMENT,
 	name varchar(128) NOT NULL,
-	category_Id smallint NOT NULL,
+	category_Id smallint UNSIGNED NOT NULL,
 	image_path varchar(256),
 	old_price int,
 	price int Not NULL,
 	jumia_product_url text,
 	short_description varchar(128),
 	custom_fields text,
+	-- featured_products tinyint DEFAULT 0,
 
 	PRIMARY KEY (id),
 	FOREIGN KEY (category_Id) REFERENCES categories(id)
 );
+
+/* DROP TABLE IF EXISTS featured_products;
+CREATE TABLE featured_products (
+	product_id int NOT NULL,
+
+	UNIQUE KEY(product_id),
+	FOREIGN KEY(product_id) REFERENCES products(id)
+); */

@@ -30,6 +30,21 @@ class Product_model extends CI_Model {
 		$this->load->database();
 	}
 
+	public function getRandomProducts($number) {
+		$select = ['id', 'name', 'category_id', 'image_path', 'price', 'old_price', 'jumia_product_url', 'short_description', 'custom_fields'];
+
+		$query = $this->db
+				->select($select)
+				->from('products')
+				->order_by('rand()')
+				->limit($number, 0)
+				->get();
+
+		return $query->result();
+
+		return $query->row();
+	}
+
 	public function create(
 		$name, 
 		$category_id,

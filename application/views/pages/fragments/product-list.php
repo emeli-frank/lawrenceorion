@@ -51,36 +51,6 @@
         background-repeat: no-repeat;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     .product-list-containter {
         display: flex;
         flex-wrap: wrap;
@@ -125,45 +95,6 @@
             overflow: hidden;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     .product-tile, :hover {
         text-decoration: none !important;

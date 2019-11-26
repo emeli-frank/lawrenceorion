@@ -26,7 +26,7 @@
                         </div>
                         <div class="inline" style="overflow: visible">
                             <div style="width: 16px; height: 16px; margin-right: 5px;"><object type="image/svg+xml" data="/assets/images/icons/at.svg"></object></div>
-                            <div><a href="mailto: lawrenceorion@gmail.com">lawrenceorion@gmail.com</a></div>
+                            <div><a href="mailto: lawrenceorion@gmail.com">lawrenceorion.com@gmail.com</a></div>
                         </div>
                     </div>
                 </div>
