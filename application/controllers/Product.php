@@ -108,61 +108,86 @@ class Product extends CI_controller {
     }
 
     public function doAddProduct() {
-        if ( 
-            // $this->input->post('name') || 
-            $this->input->post('name') 
-            && $this->input->post('category_id')
-            && $this->input->post('product-description')
-            && $this->input->post('price')
-            && $this->input->post('old-price')
-            && $this->input->post('jumia-product-url')
-            && $this->input->post('custom-field-data')
-            && isset($_FILES["product-image"])
-            ) {
-
-            // if ($this->input->post('product_id')) { $product_id = $this->input->post('product_id')}
-            $name = $this->input->post('name');
-            $category_id = $this->input->post('category_id');
-            $product_description = $this->input->post('product-description');
-            $price = $this->input->post('price');
-            $old_price = $this->input->post('old-price');
-            $jumia_product_url = $this->input->post('jumia-product-url');
-            $custom_fields = $this->input->post('custom-field-data');
-
-            $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
-            $image_path = time() . '.' . $fileExt;
-
-            $result = $this->product_model->create(
-                $name,
-                $category_id, 
-                $image_path,
-                $price,
-                $old_price,
-                $jumia_product_url,
-                $product_description,
-                $custom_fields
-                );
-
-            $insert_id = $this->db->insert_id();
-
-            $status = $this->doUpload($image_path, $insert_id);
-
-            if ($status['success']) {
-                $this->session->set_flashdata('success', 'Product was successfully created');
+        if (isset($_FILES["product-image"])) {
+            
+            $this->load->library('form_validation');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+            $this->form_validation->set_rules('name', 'Product name', 'trim|required|min_length[1]');
+            $this->form_validation->set_rules('category_id', 'Category', 'required');
+            $this->form_validation->set_rules('product-description', 'Product description', 'required|min_length[8]|max_length[256]');
+            $this->form_validation->set_rules('price', 'Price', 'trim|required|numeric');
+            $this->form_validation->set_rules('old-price', 'Old price', 'trim|numeric');
+            $this->form_validation->set_rules('jumia-product-url', 'Jumia product link', 'required');
+            // $this->form_validation->set_rules('product-image', 'Product image', 'required');
+            if ($this->form_validation->run() == FALSE) {
+                // $this->session->set_flashdata('error', 'An error occured, refill relevant fields and try again');
+                if (isset($category_id)) {
+                    $this->addProduct($category_id);
+                    // redirect("categories/$category_id/products/add");
+                }
+                else if (! empty($this->input->post('category_id'))) {
+                    $category_id = $this->input->post('category_id');
+                    $this->addProduct($category_id);
+                    // redirect("categories/$category_id/products/add");
+                }
+                else {
+                    $this->addProduct(null);
+                    // redirect("categories/all");
+                }
             }
             else {
-                $this->session->set_flashdata('error', 'Product was not created');
+                // die('passed');
+                // if ($this->input->post('product_id')) { $product_id = $this->input->post('product_id')}
+                $name = $this->input->post('name');
+                $category_id = $this->input->post('category_id');
+                $product_description = $this->input->post('product-description');
+                $price = $this->input->post('price');
+                $old_price = $this->input->post('old-price');
+                $jumia_product_url = $this->input->post('jumia-product-url');
+                $custom_fields = $this->input->post('custom-field-data');
+
+                $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
+                $image_path = time() . '.' . $fileExt;
+
+                $result = $this->product_model->create(
+                    $name,
+                    $category_id, 
+                    $image_path,
+                    $price,
+                    $old_price,
+                    $jumia_product_url,
+                    $product_description,
+                    $custom_fields
+                    );
+
+                $insert_id = $this->db->insert_id();
+
+                $status = $this->doUpload($image_path, $insert_id);
+
+                if ($status['success']) {
+                    $this->session->set_flashdata('success', 'Product was successfully created');
+                }
+                else {
+                    $this->session->set_flashdata('error', 'Product was not created');
+                }
+                
+                redirect("categories/$category_id");
             }
-            
-            redirect("categories/$category_id");
         }
         else {
             $this->session->set_flashdata('error', 'An error occured, refill relevant fields and try again');
             if (isset($category_id)) {
-                redirect("categories/$category_id");
+                $this->addProduct($category_id);
+                // redirect("categories/$category_id/products/add");
+            }
+            else if (! empty($this->input->post('category_id'))) {
+                $category_id = $this->input->post('category_id');
+                $this->addProduct($category_id);
+                // redirect("categories/$category_id/products/add");
             }
             else {
-                redirect("categories/all");
+                $this->addProduct(null);
+                // redirect("categories/all");
             }
         }
     }
@@ -191,7 +216,6 @@ class Product extends CI_controller {
     }
 
     public function addProduct($category_id = null) {
-
         $data = [
             'category_id' => $category_id,
             'categories' => $this->category_model->getCategories(),

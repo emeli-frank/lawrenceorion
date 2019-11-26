@@ -5,6 +5,8 @@
         <h2 style="margin-bottom: 50px"><?php echo (isset($product)) ? 'Edit' : 'Add'?> product</h2>
         <?php $action = (isset($product)) ? "/products/$product->id/edit/do" : '/products/add' ?>
 
+        <?php echo validation_errors(); ?>
+
         <?php echo form_open_multipart($action);?>
             <div class="row">
                 <div class="form-group col-sm-6">
@@ -16,8 +18,8 @@
 
                 <div class="form-group col-sm-6">
                     <label for="category-input">Category</label>
-                    <select id="category-input" required class="form-control" required name="category_id">
-                        <option selected>Choose...</option>
+                    <select id="category-input" class="form-control" _required name="category_id">
+                        <option value="">Choose...</option>
                         <?php foreach ($categories as $c): ?>
                             <!-- <?php // $selected = ($category->id == $category_id) ? "selected" : ""; ?> -->
 

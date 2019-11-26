@@ -32,7 +32,7 @@ CREATE TABLE products (
 	old_price int,
 	price int Not NULL,
 	jumia_product_url text,
-	short_description varchar(128),
+	short_description varchar(256),
 	custom_fields text,
 	-- featured_products tinyint DEFAULT 0,
 

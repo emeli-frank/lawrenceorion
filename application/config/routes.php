@@ -77,7 +77,7 @@ $route['products/add'] = 'product/doAddProduct';
 $route['products/(:num)/edit'] = 'product/editProduct/$1';
 $route['products/(:num)/edit/do'] = 'product/doEditProduct/$1';
 $route['products/(:num)/delete'] = 'product/deleteProduct/$1';
-$route['categories/(:num)/products/add'] = 'product/addProduct/$1/$2';
+$route['categories/(:num)/products/add'] = 'product/addProduct/$1';
 
 $route['admin'] = 'admin';
 /* $route['admin/manage/categories'] = 'productmanager/categories';
