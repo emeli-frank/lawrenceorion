@@ -14,9 +14,11 @@ class Account extends CI_controller {
 
             $this->load->library('Authservice');
             if ($this->authservice->validateLoginCredentials($email, $password)) {
+                $this->session->set_flashdata('success', 'You were successfully logged in');
                 redirect('/admin');
             }
             else {
+                $this->session->set_flashdata('error', 'Email and Password does not match');
                 redirect('/login');
             }
         }

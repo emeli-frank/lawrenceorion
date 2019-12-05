@@ -1,10 +1,10 @@
 -- Set fields as unsigned
 
-CREATE DATABASE website CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE lawrenceorion CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL ON website.* TO 'user'@'localhost';
+GRANT ALL ON lawrenceorion.* TO 'user'@'localhost';
 
-USE website;
+USE lawrenceorion;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (

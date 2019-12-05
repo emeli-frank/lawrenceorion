@@ -7,6 +7,14 @@
         </button>
     </div>
     <?php endif ?>
+    <?php if ($this->session->flashdata('error')): ?><!-- Put in a template fragment -->
+    <div class="alert alert-danger" role="alert">
+        <?= $this->session->flashdata('error'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php endif ?>
     <div id="product-category-container">
         <section id="category"><?=$category_view?></section>
         <section id="product"><?=$product_view?></section>

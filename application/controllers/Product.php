@@ -50,6 +50,7 @@ class Product extends CI_controller {
 
         $this->load->library('pagination');
 
+        // $config['base_url'] = "/categories/" . ($category_id) ? $category_id : "all";
         $config['total_rows'] = $this->product_model->getTotalNumberOfProduct($category_id);
         $config['per_page'] = Product::$no_of_products_to_load;
         $config['num_links'] = 3;
@@ -117,6 +118,7 @@ class Product extends CI_controller {
             $this->form_validation->set_rules('product-description', 'Product description', 'required|min_length[8]|max_length[256]');
             $this->form_validation->set_rules('price', 'Price', 'trim|required|numeric');
             $this->form_validation->set_rules('old-price', 'Old price', 'trim|numeric');
+            // $this->form_validation->set_rules('old-price', 'Old price', 'trim|numeric|xss_clean');
             $this->form_validation->set_rules('jumia-product-url', 'Jumia product link', 'required');
             // $this->form_validation->set_rules('product-image', 'Product image', 'required');
             if ($this->form_validation->run() == FALSE) {
@@ -168,7 +170,7 @@ class Product extends CI_controller {
                     $this->session->set_flashdata('success', 'Product was successfully created');
                 }
                 else {
-                    $this->session->set_flashdata('error', 'Product was not created');
+                    $this->session->set_flashdata('error', 'Something was wrong with the image you tried to upload');
                 }
                 
                 redirect("categories/$category_id");
@@ -193,8 +195,10 @@ class Product extends CI_controller {
     }
 
     private function doUpload($image_path, $insert_id) {
+        // return ['success' => true];
+
         $config['upload_path']          = './product-images/';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|jpeg|png';
         $config['max_size']             = 500;
         $config['file_name']             = $image_path;
 
@@ -202,6 +206,9 @@ class Product extends CI_controller {
 
         if ( ! $this->upload->do_upload('product-image')) {
             $error = ['error' => $this->upload->display_errors()];
+
+            print_r($error);
+            die();
 
             if ($insert_id) {
                 $this->product_model->delete($insert_id);
@@ -349,49 +356,4 @@ class Product extends CI_controller {
 		redirect("/categories/$category_id");
     }
 
-/*     private function productData() {
-        if ( 
-            // $this->input->post('name') || 
-            $this->input->post('name') 
-            && $this->input->post('category_id')
-            && $this->input->post('product-description')
-            && $this->input->post('price')
-            && $this->input->post('old-price')
-            && $this->input->post('jumia-product-url')
-            && $this->input->post('custom-field-data')
-            ) {
-
-                $name = $this->input->post('name');
-                $category_id = $this->input->post('category_id');
-                $product_description = $this->input->post('product-description');
-                $price = $this->input->post('price');
-                $old_price = $this->input->post('old-price');
-                $jumia_product_url = $this->input->post('jumia-product-url');
-                $fileExt = pathinfo($_FILES["product-image"]["name"], PATHINFO_EXTENSION);
-                $image_path = time() . '.' . $fileExt;
-                // $short_description = null;
-                $custom_fields = $this->input->post('custom-field-data');
-            }
-    } */
-
 }
-
-/* class Product {
-    public $name;
-    public $category_id;
-    public $product_description;
-    public $price;
-    public $old_price;
-    public $jumia_product_url;
-
-    public function __construct(
-        $name, 
-        $category_id, 
-        $product_description, 
-        $price, 
-        $old_price, 
-        $jumia_product_url, 
-    ) {
-
-    }
-} */

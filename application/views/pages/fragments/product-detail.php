@@ -15,8 +15,8 @@
                 <!-- <div>id: <?=$id?></div> -->
                 <h2 class="product-name"><?=$product->name?></h2>
                 <div class="price-container">
-                    <h2 class="product-price"><span data-currency-iso="NGN">₦</span><?=$product->price?></h2>
-                    <div class="product-price-old"><?=$product->old_price?></div>
+                    <h2 class="product-price"><span data-currency-iso="NGN">₦</span><?=number_format($product->price, 2) ?></h2>
+                    <div class="product-price-old"><?=number_format($product->old_price, 2) ?></div>
                 </div>
 
                 <a href="/categories/<?= $category->id ?>" class="product-category-name"><?= $category->name ?></a>

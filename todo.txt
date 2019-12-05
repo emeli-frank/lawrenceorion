@@ -20,13 +20,17 @@ add a featured table to the database
 
 add "no-wrap" class to layout of scss
 
-change some database numbers to unsigned
-
 error message after unsuccessful login
+
+style admin register
+
+
+see if u can use product-card template in product-list
 
 
 __________________________________________________________________________
 
+change some database numbers to unsigned
 
 in detail page, those buttons should not be in tab body but outside it so tht even while navigating tabs, the buttons are seen
 
@@ -43,6 +47,8 @@ conflict between edit and add view
 main product link page is still showing mock price
 
 order product by date added by default
+
+fabs should dissapear when it should
 
 set max width on product list card
 

@@ -24,11 +24,11 @@
                     <div class="price">
                         <span class="price-current">
                             <span data-currency-iso="NGN">₦</span>
-                            <span><?=$product->price?></span>
+                            <span><?=number_format($product->price, 2) ?></span>
                         </span>
                         <span class="price-old ">
                             <span data-currency-iso="NGN">₦</span>
-                            <span><?=$product->old_price?></span>
+                            <span><?=number_format($product->old_price, 2) ?></span>
                         </span>
                     </div>
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -112,6 +112,10 @@
     .price {
         display: flex;
         align-items: center;
+    }
+
+    .price-current, .price-old {
+        white-space: nowrap;
     }
 
     .price-current {

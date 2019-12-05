@@ -1,5 +1,13 @@
 <div class="container page-container login-form">
     <h1>Admin Login</h2>
+    <?php if ($this->session->flashdata('error')): ?><!-- Put in a template fragment -->
+    <div class="alert alert-danger" role="alert">
+        <?= $this->session->flashdata('error'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php endif ?>
     <form method="POST" action="/login">
         <div class="row">
             <div class="form-group col-sm-12">

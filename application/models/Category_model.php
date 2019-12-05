@@ -45,12 +45,19 @@ class Category_model extends CI_Model {
 	}
 
 	public function delete($category_id) {
-		$sql = "DELETE FROM products WHERE category_id=$category_id"; //TODO:: change, sql injection is possible
+		$this->db->where('category_id', $category_id)->delete('products');
+		$this->db->where('id', $category_id)->delete('categories');
+		
+		/* $sql = "DELETE FROM products WHERE category_id=$category_id"; //TODO:: change, sql injection is possible
 		$query = $this->db->query($sql);
 
 		$sql = "DELETE FROM categories WHERE id=$category_id"; //TODO:: change, sql injection is possible
-		$query = $this->db->query($sql);
+		$query = $this->db->query($sql); */
 
 		return true; // TODO:: improve
+	}
+
+	public function getCategoryCount() {
+		return $this->db->from("categories")->count_all_results();
 	}
 }

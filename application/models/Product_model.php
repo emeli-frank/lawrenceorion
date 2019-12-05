@@ -189,12 +189,7 @@ class Product_model extends CI_Model {
 	}
 
 	public function delete($product_id) {
-		// $this->db->delete('products', ['id', $product_id]);
-		$sql = "DELETE FROM products WHERE id=$product_id"; //TODO:: change, sql injection is possible
-		$query = $this->db->query($sql);
-		// print_r($query->result());
-		// die();
-		// return $query->result_array();
+		$this->db->where('id', $product_id)->delete('products');
 	}
 
 	public function categoryExist($category_id) {

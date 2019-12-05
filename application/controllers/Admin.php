@@ -18,8 +18,19 @@ class Admin extends CI_controller {
     }
 
     public function index() {
+        $this->load->model('product_model');
+        $this->load->model('category_model');
+        
+        $product_count = $this->product_model->getTotalNumberOfProduct();
+        $category_count = $this->category_model->getCategoryCount();
+
+        $data = [
+            'product_count' => $product_count,
+            'category_count' => $category_count,
+        ];
+
         $this->load->view('templates/header');
-        $this->load->view('pages/admin/dashboard');
+        $this->load->view('pages/admin/dashboard', $data);
         $this->load->view('templates/footer');
     }
 }
