@@ -7,6 +7,7 @@
 @import 'modules/_material-buttons.scss';
 @import 'modules/_modules.scss';
 @import 'modules/form-component';
+// @import 'modules/product-list';
 
 @import 'layout/_position.scss';
 @import 'layout/_spacing.scss';
@@ -15,9 +16,11 @@
 @import 'layout/_layout.scss';
 @import 'layout/_navigation.scss';
 
-@import 'pages/_home.scss';
+// @import 'pages/_home.scss';
 @import 'pages/_contact-us.scss';
-@import 'pages/_products-manager.scss';
-@import 'pages/admin';
+@import 'pages/_admin';
+@import 'pages/_products_and_categories';
+@import 'pages/_product-detail';
+@import 'pages/_product-create-update'
 
 // @import '_unknown.scss';

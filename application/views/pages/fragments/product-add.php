@@ -311,20 +311,5 @@
 </script>
 
 <style>
-    .custom-field {
-        border: 1px solid grey;
-        padding: 15px;
-        margin: 15px 0;
-    }
 
-    .custom-field-header {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .product-add-container {
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
 </style>

@@ -38,7 +38,3 @@
     <br>
     <a href="/~manage/seed">Seed DB</a>
 </div>
-
-<style>
-    
-</style>
