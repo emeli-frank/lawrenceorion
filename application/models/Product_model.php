@@ -42,7 +42,7 @@ class Product_model extends CI_Model {
 
 		return $query->result();
 
-		return $query->row();
+		// return $query->row();
 	}
 
 	public function create(
@@ -68,6 +68,7 @@ class Product_model extends CI_Model {
         $this->db->insert('products', $this);
 	}
 	
+	// todo:: remove duplicate, present in category model too
 	public function getCategories() {
 		$query = $this->db
 			->select(['categories.id', 'categories.name', 'COUNT(products.id) as product_count'])

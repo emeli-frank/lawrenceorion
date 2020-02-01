@@ -34,7 +34,7 @@ class Manage extends CI_controller {
     			$this->product_model->create(
 					"Product $i" . "_" . "$product_index", 
 					$category_id,
-					"product-placeholder-image.jpg",
+					"product-placeholder-image-" . rand(1, 10) . ".jpg",
 					8000,
 					4500,
 					"https://www.jumia.com",
